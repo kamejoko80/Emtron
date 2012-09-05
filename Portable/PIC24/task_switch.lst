@@ -1,0 +1,30 @@
+MPLAB ASM30 Listing:  task_switch.s 			page 1
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fake
+                            *ABS*:00000001 __MPLAB_DEBUGGER_PICKIT2
+                            *ABS*:00000001 __DEBUG
+                            *ABS*:00000001 __24FJ32GA002
+                            *ABS*:00000001 __PIC24F
+                            *ABS*:00000001 __HAS_PMP
+                            *ABS*:00000001 __C30COFF
+       task_switch.s:11     task_switch.s.scn1:00000000 _Task_ChangeASM
+
+UNDEFINED SYMBOLS
+_Task_Change
+SR
+RCOUNT
+TBLPAG
+CORCON
+PSVPAG
+_uxCriticalNesting
+_Task_CurrentStackLocation
+
+EQUATE SYMBOLS
+        __MPLAB_DEBUGGER_PICKIT2 = 0x1
+                         __DEBUG = 0x1
+                   __24FJ32GA002 = 0x1
+                        __PIC24F = 0x1
+                       __HAS_PMP = 0x1
+                       __C30COFF = 0x1
