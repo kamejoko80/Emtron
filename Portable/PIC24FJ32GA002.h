@@ -27,9 +27,9 @@ typedef enum PeripheralType_e
 {
     PERIPHERAL_UART_1,
     PERIPHERAL_UART_2,
-    PERIPHERAL_SOFTSPI
+    PERIPHERAL_SOFTSPI,
+    PERIPHERAL_SOFTI2C
 } PeripheralType_t;
-#define CFG_PERIPHEAL_MAX_DRIVERS sizeof(PeripheralType_t)
 
 #define GPIO_PORT_A
 #define GPIO_PORT_B

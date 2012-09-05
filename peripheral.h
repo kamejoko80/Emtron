@@ -5,7 +5,6 @@
 #include "stddefs.h"
 #include "portable.h"
 #include "peripheral_inf.h"
-#include "Drivers/uart.h"
 
 typedef struct PeripheralDriver_s
 {
@@ -16,12 +15,12 @@ typedef struct PeripheralDriver_s
     UI08_t TaskHandleRx:4;
 
     // Underlying methods used.
-    HandlerInit fncInit;
-    HandlerMode fncMode;
-    HandlerTRx fncTx;
-    HandlerTRx fncRx;
-    HandlerTxRx fncTxRx;
-    HandlerPin fncRxPin;
+    HandlerInit     fncInit;
+    HandlerMode     fncMode;
+    HandlerTRx      fncTx;
+    HandlerTRx      fncRx;
+    HandlerTxRx     fncTxRx;
+    HandlerPin      fncRxPin;
 
 } PeripheralDriver_t;
 
@@ -38,5 +37,8 @@ UI08_t Peripheral_RxPin(PeripheralHandle_t* peripheral);
 PeripheralResult_t Peripheral_Write( PeripheralHandle_t* peripheral, UI08_t* buffer, UI08_t bytes);
 PeripheralResult_t Peripheral_ReadWrite( PeripheralHandle_t* peripheral, UI08_t* tx_buffer, UI08_t* rx_buffer, UI08_t bytes);
 void Peripheral_Close( PeripheralHandle_t* peripheral);
+
+void Peripheral_SendStart(PeripheralHandle_t* peripheral);
+void Peripheral_SendStop(PeripheralHandle_t* peripheral);
 
 #endif

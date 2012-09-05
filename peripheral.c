@@ -8,19 +8,21 @@ PeripheralHandle_t __PeripheralHandles[CFG_PERIPHEAL_MAX_HANDLES];
 
 void Peripheral_Register(PeripheralType_t type, UI08_t id, HandlerInit fncInit, HandlerMode fncMode, HandlerTRx fncTx, HandlerTRx fncRx, HandlerTxRx fncTxRx, HandlerPin fncRxPin)
 {
+    // TODO: look up free spot
     // register it.
     PeripheralDriver_t* drv = &(__PeripheralDrivers[(UI08_t)type]); //convert type to int
-    drv->type = type;
-    drv->fncInit = fncInit;
-    drv->fncMode = fncMode;
-    drv->fncRx = fncRx;
-    drv->fncTx = fncTx;
-    drv->fncTxRx = fncTxRx;
-    drv->fncRxPin = fncRxPin;
-    drv->peripheral = id;
+    
+    drv->type           = type;
+    drv->fncInit        = fncInit;
+    drv->fncMode        = fncMode;
+    drv->fncRx          = fncRx;
+    drv->fncTx          = fncTx;
+    drv->fncTxRx        = fncTxRx;
+    drv->fncRxPin       = fncRxPin;
+    drv->peripheral     = id;
 
-    drv->TaskHandleRx = 0xF;
-    drv->TaskHandleTx = 0xF;
+    drv->TaskHandleRx   = 0xF;
+    drv->TaskHandleTx   = 0xF;
 }
 
 PeripheralHandle_t* Peripheral_Open( PeripheralType_t type, void* args)
@@ -182,4 +184,14 @@ void Peripheral_Close( PeripheralHandle_t* peripheral)
         peripheral->StateTx = PS_OPEN;
         peripheral->TaskTx = 0xFF;
     }
+}
+
+
+void Peripheral_SendStart(PeripheralHandle_t* peripheral)
+{
+    Peripheral_Mode(peripheral, MODE_START, null);
+}
+void Peripheral_SendStop(PeripheralHandle_t* peripheral)
+{
+    Peripheral_Mode(peripheral, MODE_STOP, null);
 }

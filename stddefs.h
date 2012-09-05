@@ -86,6 +86,10 @@ typedef struct IOPort_s
     } else {    \
         *(IOPorts[port].TRIS) &= ~(1<<pin); \
     }
+#define SGPIO_OpenDrainEnable(gpio) \
+    *(IOPorts[(gpio).port].ODC) |= (1<<(gpio).pin);
+#define SGPIO_OpenDrainDisable(gpio) \
+    *(IOPorts[(gpio).port].ODC) &= ~(1<<(gpio).pin);
 #define SGPIO_DirectionGPIO(gpio, dir) \
     if(dir) {   \
         *(IOPorts[(gpio).port].TRIS) |= (1<<(gpio).pin);    \

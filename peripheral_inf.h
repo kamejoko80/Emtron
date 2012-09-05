@@ -23,7 +23,9 @@ typedef enum PeripheralResult_e
     PR_OK,
     PR_BLOCKED,
     PR_NOT_EXIST,
-    PR_TIMEOUT
+    PR_TIMEOUT,
+    PR_ACK,
+    PR_NOT_ACK
 } PeripheralResult_t;
 
 typedef enum PeripheralModeReg_e
@@ -38,7 +40,9 @@ typedef enum PeripheralModeReg_e
     MODE_TX_PIN,
     MODE_RX_PIN,
     MODE_CLK_PIN,
-    MODE_DATA_PIN
+    MODE_DATA_PIN,
+    MODE_START,
+    MODE_STOP
 } PeripheralModeReg_t;
 
 typedef struct PeripheralHandle_s
