@@ -10,7 +10,7 @@ void SoftI2C_Delay1_2(void);
 void SoftI2C_Delay1_2(void)
 {
     UI16_t i = 0;
-    for(i = 0 ;i < 100; i++);
+    //for(i = 0 ;i < 5; i++);
 }
 
 void SoftI2C_Register(SoftI2C this)
@@ -65,6 +65,8 @@ PeripheralResult_t SoftI2C_Mode(PeripheralHandle_t* handle, PeripheralModeReg_t 
     switch(mode)
     {
         case MODE_START:
+            if(SGPIO_ReadGPIO(this->sda) == 0)  SGPIO_Write1GPIO(this->sda);
+            if(SGPIO_ReadGPIO(this->scl) == 0)  SGPIO_Write1GPIO(this->scl);
             // pull SDA down when SCL is high
             SGPIO_Write0GPIO(this->sda);
             SoftI2C_Delay1_2();
@@ -78,7 +80,6 @@ PeripheralResult_t SoftI2C_Mode(PeripheralHandle_t* handle, PeripheralModeReg_t 
             SGPIO_Write1GPIO(this->sda);
             break;
     }
-    SoftI2C_Delay1_2();
     SoftI2C_Delay1_2();
 }
 PeripheralResult_t SoftI2C_Tx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t length)
