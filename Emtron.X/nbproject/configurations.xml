@@ -31,6 +31,7 @@
       <itemPath>../Devices/MCP355X.c</itemPath>
       <itemPath>../Drivers/SoftI2C.c</itemPath>
       <itemPath>../Devices/MCP9800.c</itemPath>
+      <itemPath>../Devices/EEPROM.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

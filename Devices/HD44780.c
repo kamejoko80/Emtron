@@ -1,5 +1,4 @@
 #include "HD44780.h"
-#include "stddefs.h"
 
 
 void HD44780_Write(HD44780 this, UI08_t type, UI08_t code);
