@@ -11,6 +11,8 @@
 #define SI32_t signed long
 #define SI16_t signed int
 #define SI08_t signed char
+
+#define F32_t float
 #define PTR16(addr) ((UI16_t*)addr)
 #ifndef NULL
     #define NULL 0
@@ -134,5 +136,18 @@ typedef struct IOPort_s
 #define GPIO_Write1(port, pin) *(IOPorts[IO_##port].LAT) |=  (1U << pin);
 #define GPIO_Write0(port, pin) *(IOPorts[IO_##port].LAT)  &= ~(1U << pin);
 
+
+typedef enum BitResolution_t
+{
+    RESOLUTION_8BIT,
+    RESOLUTION_9BIT,
+    RESOLUTION_10BIT,
+    RESOLUTION_11BIT,
+    RESOLUTION_12BIT,
+    RESOLUTION_13BIT,
+    RESOLUTION_14BIT,
+    RESOLUTION_15BIT,
+    RESOLUTION_16BIT
+} BitResolution_t;
 
 #endif
