@@ -1,8 +1,8 @@
 #ifndef TRITON_PERIPHERAL_INF
 #define TRITON_PERIPHERAL_INF
 
-#include "stddefs.h"
-#include "task.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/task.h"
 
 
 typedef enum PeripheralState_e

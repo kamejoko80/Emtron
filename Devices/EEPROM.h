@@ -1,9 +1,9 @@
-#ifndef EEPROM_H
-#define EEPROM_H
+#ifndef EMTRON_DEVICES_EEPROM_H
+#define EMTRON_DEVICES_EEPROM_H
 
-#include "stddefs.h"
-#include "task.h"
-#include "peripheral.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/task.h"
+#include "RTOS/peripheral.h"
 
 typedef struct EEPROM_t* EEPROM;
 

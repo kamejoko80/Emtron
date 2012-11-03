@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 /**** DATA TYPES ****/
+#define UI64_t unsigned long long
 #define UI32_t unsigned long
 #define UI16_t unsigned int
 #define UI08_t unsigned char
@@ -46,7 +47,7 @@ typedef struct IOPort_s
 	UI16_t* ODC;
 } IOPort_t;
 
-#include "portable.h"
+#include "RTOS/portable.h"
 
 /***** General purpose Fast-GPIO writes (not flexible)*****/
 //TODO: add set/clr function
@@ -55,7 +56,7 @@ typedef struct IOPort_s
 	#define FGPIO_Write(port, pin, value) if(value) { \
 		GPIO_Write1_##port |=  (1U << pin); \
 	} else { \
-		GPIO_Write0_##port }=  (1U << pin); \
+		GPIO_Write0_##port |=  (1U << pin); \
 	}
 	#define FGPIO_Write1(port, pin) GPIO_Write1_##port |=  (1U << pin)
 	#define FGPIO_Write0(port, pin) GPIO_Write0_##port |=  (1U << pin)

@@ -1,9 +1,9 @@
-#ifndef TRITON_SOFTSPI_H
-#define TRITON_SOFTSPI_H
+#ifndef EMTRON_DRIVERS_SOFTSPI_H
+#define EMTRON_DRIVERS_SOFTSPI_H
 
-#include "../portable.h"
-#include "../peripheral.h"
-#include "stddefs.h"
+#include "RTOS/portable.h"
+#include "RTOS/peripheral.h"
+#include "RTOS/stddefs.h"
 
 typedef struct SoftSPI_t* SoftSPI;
 

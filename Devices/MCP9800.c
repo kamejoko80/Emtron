@@ -1,9 +1,8 @@
-#include "MCP9800.h"
-
-UI08_t bf[3];
+#include "Devices/MCP9800.h"
 
 void MCP9800_Init(PeripheralHandle_t* peripheral, BitResolution_t resolution)
 {
+    UI08_t bf[3];
     bf[0] = 0b10010000;
     bf[1] = 0x01;
     bf[2] = 0b10000000;
@@ -31,6 +30,7 @@ void MCP9800_Init(PeripheralHandle_t* peripheral, BitResolution_t resolution)
 
 void MCP9800_Read(PeripheralHandle_t* peripheral, float* temp)
 {
+    UI08_t bf[3];
     bf[0] = 0b10010001;
     bf[1] = 0;
     Peripheral_SendStart(peripheral);

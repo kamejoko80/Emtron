@@ -4,12 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>../peripheral.h</itemPath>
-      <itemPath>../peripheral_inf.h</itemPath>
-      <itemPath>../portable.h</itemPath>
-      <itemPath>../rtos.h</itemPath>
-      <itemPath>../stddefs.h</itemPath>
-      <itemPath>../task.h</itemPath>
+      <itemPath>../hardware.h</itemPath>
+      <itemPath>../project.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -18,20 +14,36 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>../peripheral.c</itemPath>
-      <itemPath>../rtos.c</itemPath>
-      <itemPath>../task.c</itemPath>
-      <itemPath>../Portable/PIC24FJ32GA002.c</itemPath>
-      <itemPath>../Devices/MCP23S17.c</itemPath>
-      <itemPath>../Portable/PIC24/kernel.c</itemPath>
-      <itemPath>../Portable/PIC24/timer.c</itemPath>
-      <itemPath>../Portable/PIC24/task_switch.s</itemPath>
-      <itemPath>../Devices/HD44780.c</itemPath>
-      <itemPath>../Drivers/SoftSPI.c</itemPath>
-      <itemPath>../Devices/MCP355X.c</itemPath>
-      <itemPath>../Drivers/SoftI2C.c</itemPath>
-      <itemPath>../Devices/MCP9800.c</itemPath>
-      <itemPath>../Devices/EEPROM.c</itemPath>
+      <logicalFolder name="f1" displayName="Devices" projectFiles="true">
+        <itemPath>../Devices/EEPROM.c</itemPath>
+        <itemPath>../Devices/HD44780.c</itemPath>
+        <itemPath>../Devices/MCP23S17.c</itemPath>
+        <itemPath>../Devices/MCP355X.c</itemPath>
+        <itemPath>../Devices/MCP9800.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Drivers" projectFiles="true">
+        <itemPath>../Drivers/SoftI2C.c</itemPath>
+        <itemPath>../Drivers/SoftSPI.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="Portable" projectFiles="true">
+        <logicalFolder name="f1" displayName="PIC24" projectFiles="true">
+          <itemPath>../Portable/PIC24/kernel.c</itemPath>
+          <itemPath>../Portable/PIC24/timer.c</itemPath>
+          <itemPath>../Portable/PIC24/uart.c</itemPath>
+          <itemPath>../Portable/PIC24/task_switch.s</itemPath>
+          <itemPath>../Portable/PIC24/PIC24.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="RTOS" projectFiles="true">
+        <itemPath>../RTOS/peripheral.c</itemPath>
+        <itemPath>../RTOS/rtos.c</itemPath>
+        <itemPath>../RTOS/task.c</itemPath>
+        <itemPath>../RTOS/taskQueue.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5" displayName="Utilities" projectFiles="true">
+        <itemPath>../Utilities/circular_buffer.c</itemPath>
+      </logicalFolder>
+      <itemPath>../main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -41,19 +53,26 @@
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="default" type="3">
+    <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC24FJ32GA002</targetDevice>
+        <targetDevice>PIC24FJ64GA002</targetDevice>
         <targetHeader></targetHeader>
-        <platformTool>Simulator</platformTool>
-        <languageToolchain>C30</languageToolchain>
-        <languageToolchainVersion>3_30b</languageToolchainVersion>
+        <targetPluginBoard></targetPluginBoard>
+        <platformTool>PICkit2PlatformTool</platformTool>
+        <languageToolchain>XC16</languageToolchain>
+        <languageToolchainVersion>1.00</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
-        <archiverTool>
-        </archiverTool>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <alternateLoadableFile></alternateLoadableFile>
+        </loading>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
@@ -65,10 +84,10 @@
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
       <C30>
-        <property key="code-model" value="default"/>
-        <property key="const-model" value="default"/>
-        <property key="data-model" value="default"/>
-        <property key="enable-all-warnings" value="false"/>
+        <property key="code-model" value="large-code"/>
+        <property key="const-model" value="const-in-code"/>
+        <property key="data-model" value="large-data"/>
+        <property key="enable-all-warnings" value="true"/>
         <property key="enable-ansi-std" value="false"/>
         <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
@@ -79,15 +98,48 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="C:\Users\Hans\Documents\Proteus\PIC24RTOS\PIC24RTOS.X;C:\Users\Hans\Documents\Github\Emtron"/>
+                  value="C:\Users\Hans\Documents\GitHub\Emtron"/>
         <property key="isolate-each-function" value="false"/>
-        <property key="optimization-level" value="s"/>
+        <property key="keep-inline" value="false"/>
+        <property key="oXC16gcc-align-arr" value="false"/>
+        <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
+        <property key="oXC16gcc-data-sects" value="false"/>
+        <property key="oXC16gcc-errata" value=""/>
+        <property key="oXC16gcc-fillupper" value=""/>
+        <property key="oXC16gcc-large-aggregate" value="false"/>
+        <property key="oXC16gcc-mauxflash" value="false"/>
+        <property key="oXC16gcc-mpa-lvl" value=""/>
+        <property key="oXC16gcc-name-text-sec" value=""/>
+        <property key="oXC16gcc-near-chars" value="false"/>
+        <property key="oXC16gcc-no-isr-warn" value="false"/>
+        <property key="oXC16gcc-sfr-warn" value="false"/>
+        <property key="oXC16gcc-smar-io-lvl" value="1"/>
+        <property key="oXC16gcc-smart-io-fmt" value=""/>
+        <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
-        <property key="scalar-model" value="default"/>
+        <property key="scalar-model" value="large-scalar"/>
+        <property key="use-cci" value="false"/>
       </C30>
       <C30-AS>
+        <property key="assembler-symbols" value=""/>
+        <property key="expand-macros" value="false"/>
+        <property key="extra-include-directories-for-assembler" value=""/>
+        <property key="extra-include-directories-for-preprocessor" value=""/>
+        <property key="false-conditionals" value="false"/>
+        <property key="keep-locals" value="false"/>
+        <property key="list-assembly" value="false"/>
+        <property key="list-section-info" value="false"/>
+        <property key="list-source" value="false"/>
+        <property key="list-symbols" value="false"/>
+        <property key="oXC16asm-extra-opts" value=""/>
+        <property key="oXC16asm-list-to-file" value="false"/>
+        <property key="omit-debug-dirs" value="false"/>
+        <property key="omit-forms" value="false"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="relax" value="false"/>
+        <property key="warning-level" value="emit-warnings"/>
       </C30-AS>
       <C30-LD>
         <property key="boot-eeprom" value="no_eeprom"/>
@@ -106,23 +158,35 @@
         <property key="heap-size" value=""/>
         <property key="input-libraries" value=""/>
         <property key="linker-symbols" value=""/>
-        <property key="map-file" value=""/>
+        <property key="map-file"
+                  value="C:\Users\Hans\Documents\GitHub\Emtron\Emtron.X\usage.map"/>
+        <property key="oXC16ld-extra-opts" value=""/>
+        <property key="oXC16ld-fill-upper" value="0"/>
+        <property key="oXC16ld-force-link" value="false"/>
+        <property key="oXC16ld-no-smart-io" value="false"/>
+        <property key="oXC16ld-nostdlib" value="false"/>
+        <property key="oXC16ld-stackguard" value="16"/>
         <property key="preprocessor-macros" value=""/>
-        <property key="remove-unused-sections" value="false"/>
-        <property key="report-memory-usage" value="false"/>
+        <property key="remove-unused-sections" value="true"/>
+        <property key="report-memory-usage" value="true"/>
         <property key="secure-eeprom" value="no_eeprom"/>
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
-        <property key="stack-size" value=""/>
+        <property key="stack-size" value="16"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
       </C30-LD>
       <C30Global>
+        <property key="fast-math" value="false"/>
+        <property key="generic-16-bit" value="false"/>
+        <property key="legacy-libc" value="false"/>
+        <property key="oXC16glb-macros" value=""/>
+        <property key="output-file-format" value="elf"/>
       </C30Global>
-      <Simulator>
-      </Simulator>
+      <PICkit2PlatformTool>
+      </PICkit2PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>

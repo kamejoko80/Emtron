@@ -1,7 +1,7 @@
 #ifndef TRITON_RTOS_H
 #define TRITON_RTOS_H
 
-#include "stddefs.h"
+#include "RTOS/stddefs.h"
 #include "project.h"
 
 typedef enum RTOS_Trace_Message_e

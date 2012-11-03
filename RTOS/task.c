@@ -1,7 +1,5 @@
-#include "task.h"
-#include <stdio.h>
-#include <string.h>
-#include "portable.h"
+
+#include "RTOS/task.h"
 
 TritonTask_t* Task_Top;
 TritonTask_t* Task_Active;
@@ -18,9 +16,10 @@ UI16_t uxCriticalNesting = 0;
 // local functions
 
 TritonTask_t* Task_GetTask(int depth);
+void Task_FindNext(void);
 
 /**** IDlE TASK ****/
-int Task_Idle_Stack[128];
+int Task_Idle_Stack[48];
 TritonTask_t Task_Idle;
 
 /**
@@ -110,38 +109,80 @@ void Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, vo
 // Finds next task on Suspend()
 void Task_FindBestTask(void)
 {
-	Task_Tmp  = Task_Top;
-	Task_Next = Task_Top;
+    Task_Tmp  = Task_Top;
+    Task_Next = Task_Top;
+    Task_FindNext();
+}
+
+// Finds next task on Tick()
+void Task_FindNextTask(void)
+{
+    // 
+    Task_Tmp  = Task_Top;
+    Task_Next = Task_Active;
+    Task_FindNext();
+}
+
+void Task_FindNext(void)
+{
+
 	do
 	{
 		if(Task_Tmp->RunNext <= Task_CurrentTime)
 		{
+                    if (Task_Tmp->State == TASK_SUSPENDED
+                            || Task_Tmp->State == TASK_RUNNING)
+                    {
 			// Is this task of higher priority? Then set as next.
 			if (Task_Tmp->Priority > Task_Next->Priority)
 				Task_Next = Task_Tmp;
+                    }
+                    else if(Task_Tmp->State_WaitArgument.timeout != 0)
+                    {
+                        Task_Tmp->State_WaitArgument.timedout = 1;
+			// Is this task of higher priority? Then set as next.
+			if (Task_Tmp->Priority > Task_Next->Priority)
+				Task_Next = Task_Tmp;
+                    }
 		}
 		Task_Tmp = Task_Tmp->NextTask;
 	}
 	while(Task_Tmp != 0);
 }
 
-// Finds next task on Tick()
-void Task_FindNextTask(void)
+UI08_t Task_Wait(TritonTaskState_WaitData_t argument)
 {
-	// 
-	Task_Tmp  = Task_Top;
-	Task_Next = Task_Active;
-	do
-	{
-		if(Task_Tmp->RunNext <= Task_CurrentTime)
-		{
-			// Is this task of higher priority? Then set as next.
-			if (Task_Tmp->Priority > Task_Next->Priority)
-				Task_Next = Task_Tmp;
-		}
-		Task_Tmp = Task_Tmp->NextTask;
-	}
-	while(Task_Tmp != 0);
+    Task_Active->State_WaitArgument = argument;
+    Task_Active->State_WaitArgument.timedout = 0;
+    Task_Active->RunNext = Task_CurrentTime + argument.timeout;
+    Task_Active->State = TASK_WAITING;
+
+    Kernel_Suspend();
+
+    
+    if (Task_Active->State_WaitArgument.timeout == 0)
+        return 1;
+    else
+        return 1-Task_Active->State_WaitArgument.timedout;
+    
+}
+
+void Task_Signal(TritonTaskState_WaitData_t argument)
+{
+    Task_Tmp  = Task_Top;
+    do
+    {
+        if (Task_Tmp->State_WaitArgument.type == argument.type)
+        {
+            if(Task_Tmp->State_WaitArgument.data.__cmp == argument.data.__cmp)
+            {
+                Task_Tmp->RunNext = Task_CurrentTime;
+                Task_Tmp->State = TASK_SUSPENDED; // return back to suspended.
+            }
+        }
+        Task_Tmp = Task_Tmp->NextTask;
+    }
+    while(Task_Tmp != 0);
 }
 
 void Task_Sleep(Time_t time)
@@ -160,17 +201,18 @@ void Task_Change(void)
 	if(Task_Active->RunNext < Task_Active->RunLast)
 		Task_Active->RunNext = Task_CurrentTime+1;
 
-	if(Task_Active->State == TASK_SUSPENDING)
+	if(Task_Active->State == TASK_SUSPENDING
+                || Task_Active->State == TASK_WAITING)
 	{
-		Task_Active->State = TASK_SUSPENDED;
-		Task_FindBestTask();
+            if (Task_Active->State != TASK_WAITING)
+            Task_Active->State = TASK_SUSPENDED;
+            Task_FindBestTask();
 	}
-	else
+        else
 	{
-		Task_Active->State = TASK_SUSPENDED;
-		Task_FindNextTask();
+            Task_Active->State = TASK_SUSPENDED;
+            Task_FindNextTask();
 	}
-
         #ifdef RTOS_TRACE
         if(Task_Next->ID != Task_Active->ID)
         {
@@ -195,8 +237,8 @@ volatile Time_t CPULoadIdle=0;
 #endif
 void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
 {
-	Task_CurrentTime++;
 	Timer_ClrSysTimerInt();
+	Task_CurrentTime++;
 
         #ifdef RTOS_TRACE
         Task_Active->RunActive ++;

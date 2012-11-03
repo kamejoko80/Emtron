@@ -1,5 +1,5 @@
-#include "SoftI2C.h"
-#include "../peripheral.h"
+#include "Drivers/SoftI2C.h"
+#include "RTOS/peripheral.h"
 
 UI08_t I2C_id = 0;
 SoftI2C SoftI2CList[2]; // up to 2 soft I2C busses.
@@ -9,8 +9,6 @@ void SoftI2C_Delay1_2(void);
 
 void SoftI2C_Delay1_2(void)
 {
-    UI16_t i = 0;
-    //for(i = 0 ;i < 5; i++);
 }
 
 void SoftI2C_Register(SoftI2C this)
@@ -46,6 +44,8 @@ void SoftI2C_IO(SoftI2C this, PeripheralModeReg_t mode, IOPin_t pin)
             SGPIO_DirectionGPIO(pin, OUTPUT);
             SGPIO_OpenDrainEnable(pin);
             break;
+        default:
+            break;
     }
 }
 
@@ -79,8 +79,12 @@ PeripheralResult_t SoftI2C_Mode(PeripheralHandle_t* handle, PeripheralModeReg_t 
             SoftI2C_Delay1_2();
             SGPIO_Write1GPIO(this->sda);
             break;
+        default:
+            return PR_NOT_EXIST;
+            break;
     }
     SoftI2C_Delay1_2();
+    return PR_OK;
 }
 PeripheralResult_t SoftI2C_Tx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t length)
 {
@@ -91,6 +95,7 @@ PeripheralResult_t SoftI2C_Tx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t le
         buf++;
         length--;
     }
+    return PR_OK;
 }
 PeripheralResult_t SoftI2C_Rx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t length)
 {
@@ -103,6 +108,7 @@ PeripheralResult_t SoftI2C_Rx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t le
         // Do acknowledge
         SoftI2C_TxRxBit(SoftI2CList[handle->Peripheral], ((length == 0)?1:0));
     }
+    return PR_OK;
 }
 PeripheralResult_t SoftI2C_TxByte(SoftI2C this, UI08_t* b)
 {
@@ -126,6 +132,7 @@ PeripheralResult_t SoftI2C_RxByte(SoftI2C this, UI08_t* b)
     {
         *b |= (SoftI2C_TxRxBit(this, 1)) << i;
     }
+    return PR_OK;
 }
 UI08_t SoftI2C_TxRxBit(SoftI2C i2c, UI08_t b)
 {

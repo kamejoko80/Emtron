@@ -1,9 +1,9 @@
-#ifndef MCP355X_H
-#define MCP355X_H
+#ifndef EMTRON_DEVICES_MCP355X_H
+#define EMTRON_DEVICES_MCP355X_H
 
-#include "stddefs.h"
-#include "../peripheral.h"
-#include "../peripheral_inf.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/peripheral.h"
+#include "RTOS/peripheral_inf.h"
 
 typedef struct MCP355X_t* MCP355X;
 

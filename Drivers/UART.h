@@ -1,8 +1,8 @@
 #ifndef TRITON_UART_H
 #define TRITON_UART_H
 
-#include "../portable.h"
-#include "../peripheral_inf.h"
+#include "RTOS/portable.h"
+#include "RTOS/peripheral_inf.h"
 
 /*
 typedef struct UartHandle_s

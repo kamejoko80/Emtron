@@ -1,8 +1,8 @@
-#ifndef MCP23S17_H
-#define MCP23S17_h
+#ifndef EMTRON_DEVICES_MCP23S17_H
+#define EMTRON_DEVICES_MCP23S17_h
 
-#include "stddefs.h"
-#include "peripheral.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/peripheral.h"
 typedef struct MCP23S17_t* MCP23S17;
 
 typedef enum MCP23S17_Registers_s

@@ -1,6 +1,6 @@
-#ifndef HD44780_H
-#define HD44780_H
-#include "stddefs.h"
+#ifndef EMTRON_DEVICES_HD44780_H
+#define EMTRON_DEVICES_HD44780_H
+#include "RTOS/stddefs.h"
 
 #define HD44780_RW_WRITE 0
 #define HD44780_RW_READ 1

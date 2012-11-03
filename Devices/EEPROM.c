@@ -1,4 +1,4 @@
-#include "EEPROM.h"
+#include "Devices/EEPROM.h"
 
 void EEPROM_WriteBytes(EEPROM this, UI16_t addr, UI08_t* data, UI16_t length);
 void EEPROM_ReadBytes (EEPROM this, UI16_t addr, UI08_t* data, UI16_t length);

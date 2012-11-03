@@ -1,4 +1,4 @@
-#include "SoftSPI.h"
+#include "Drivers/SoftSPI.h"
 #include <string.h>
 
 UI08_t spi_id = 0;
@@ -50,12 +50,16 @@ void SoftSPI_IO(SoftSPI this, PeripheralModeReg_t mode, IOPin_t pin)
             SGPIO_DirectionGPIO(pin, OUTPUT);
             SGPIO_Write1GPIO(pin);
             break;
+
+        default:
+            break;
     }
 }
 
 PeripheralResult_t SoftSPI_Mode(PeripheralHandle_t* handle, PeripheralModeReg_t mode, void* data)
 {
     //
+    return PR_OK;
 }
 
 PeripheralResult_t  SoftSPI_Tx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t length)
@@ -66,6 +70,7 @@ PeripheralResult_t  SoftSPI_Tx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t l
         buf++;
         length--;
     }
+    return PR_OK;
 }
 PeripheralResult_t  SoftSPI_Rx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t length)
 {
@@ -75,6 +80,7 @@ PeripheralResult_t  SoftSPI_Rx(PeripheralHandle_t* handle, UI08_t* buf, UI16_t l
         buf++;
         length--;
     }
+    return PR_OK;
 }
 PeripheralResult_t  SoftSPI_TxRx(PeripheralHandle_t* handle, UI08_t* tx_buf, UI08_t* rx_buf, UI16_t length)
 {
@@ -86,6 +92,7 @@ PeripheralResult_t  SoftSPI_TxRx(PeripheralHandle_t* handle, UI08_t* tx_buf, UI0
         
         length--;
     }
+    return PR_OK;
 }
 
 UI08_t SoftSPI_ReadSDO(PeripheralHandle_t* handle)

@@ -1,10 +1,10 @@
 #ifndef TRITON_PERIPHERAL
 #define TRITON_PERIPHERAL
 
-#include "task.h"
-#include "stddefs.h"
-#include "portable.h"
-#include "peripheral_inf.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/task.h"
+#include "RTOS/portable.h"
+#include "RTOS/peripheral_inf.h"
 
 typedef struct PeripheralDriver_s
 {

@@ -1,10 +1,16 @@
+
 #ifndef TASK_H
 #define TASK_H
 
-#include "rtos.h"
-#include "stddefs.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/rtos.h"
+#include "RTOS/taskHelpers.h"
+#include "RTOS/portable.h"
+#include <stdio.h>
+#include <string.h>
 
 #define Time_t UI32_t
+
 
 /**
  * Types of state a task can obtain.
@@ -14,8 +20,37 @@ typedef enum TritonTaskState_e
 	TASK_RUNNING,
 	TASK_SUSPENDED,
 	TASK_SUSPENDING,
+        TASK_WAITING,
 	TASK_STOP
 } TritonTaskState_t;
+
+/**
+ */
+typedef enum TritonTaskHelper_e
+{
+    TASKHELPER_EVENT,
+    TASKHELPER_MESSAGE,
+    TASKHELPER_QUEUE
+} TritonTaskHelper_t;
+
+/**
+ * Type of stuff a task can wait for
+ */
+typedef union
+{
+    TaskQueue_t* Queue;
+    UI32_t Events;
+    UI32_t Message;
+
+    UI32_t __cmp;
+} TritonTaskState_WaitData_u;
+typedef struct TritonTaskState_WaitData_s
+{
+    TritonTaskHelper_t type:3;
+    UI08_t timedout:1;
+    UI16_t timeout;
+    TritonTaskState_WaitData_u data;
+} TritonTaskState_WaitData_t;
 
 /**
  * Basic type for a task instance. Usage of linked list reduces initial memory usage and configuration.
@@ -45,6 +80,9 @@ typedef struct TritonTask_s
 
     //! State the task currently is in.
     TritonTaskState_t State;
+
+    //! Task waiting arguments.
+    TritonTaskState_WaitData_t State_WaitArgument;
 
     //! Linked list reference to next task.
     struct TritonTask_s* NextTask;
@@ -92,6 +130,18 @@ void Task_Sleep(Time_t time);
 void Task_SleepUntil(Time_t time);
 
 /**
+ * Suspends a task due to a task-helper calling for a wait procedure.
+ * @return
+ */
+UI08_t Task_Wait(TritonTaskState_WaitData_t argument);
+
+/**
+ * Suspends a task due to a task-helper calling for a wait procedure.
+ * @return
+ */
+void Task_Signal(TritonTaskState_WaitData_t argument);
+
+/**
  * Gets the current time.
  * Gets the current time from the task manager (ticks). This can be used as a rough time keeper, but is more useful to determine SleepUntil values.
  * @return  time_t time (ticks)
@@ -106,6 +156,8 @@ Time_t Task_GetTime(void);
 void Task_Start(void);
 
 extern void Task_ChangeASM(void);
+
+void Kernel_InitializeStack(TritonTask_t* Task, int* stack, void* function);
 
 
 extern int* CurrentTaskStack ;

@@ -1,0 +1,12 @@
+#ifndef PROJECT_H
+#define PROJECT_H
+
+#define OSC_INT_32MHZ
+#define CFG_PERIPHERAL_HEAPSIZE 0
+#define CFG_PERIPHEAL_MAX_DRIVERS 4
+#define CFG_PERIPHEAL_MAX_HANDLES 4
+
+//#define RTOS_TRACE
+#define RTOS_TRACE_PORT 0
+
+#endif

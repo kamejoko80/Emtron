@@ -1,5 +1,5 @@
-#include "MCP355X.h"
-#include "stddefs.h"
+#include "Devices/MCP355X.h"
+#include "RTOS/stddefs.h"
 
 void MCP355X_Init(MCP355X this, PeripheralHandle_t* peripheral, IOPin_t cs)
 {

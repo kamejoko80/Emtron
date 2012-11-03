@@ -1,8 +1,7 @@
-
 #include "Devices/MCP23S17.h"
-#include "stddefs.h"
-#include "portable.h"
-#include "peripheral.h"
+#include "RTOS/stddefs.h"
+#include "RTOS/portable.h"
+#include "RTOS/peripheral.h"
 
 void MCP23S17_Init(MCP23S17 this, PeripheralHandle_t* peripheral, UI08_t address, IOPin_t cs)
 {

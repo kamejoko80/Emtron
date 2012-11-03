@@ -1,24 +1,10 @@
-/*
- * kernel.h
- *
- *  Created on: Jun 10, 2012
- *      Author: Hans
- */
+#ifndef PORTABLE_PIC24_KERNEL_H
+#define PORTABLE_PIC24_KERNEL_H
 
-#ifndef KERNEL_H
-#define KERNEL_H
+#include "RTOS/stddefs.h"
 
-#include "task.h"
-#include "stddefs.h"
-#include "portable.h"
+#ifdef TARGET_PIC24
 
-
-
-#ifdef PORT__PIC24_H
-
-
-// TODO: replace with portable code!
-// This pushes all proccesor registers on the stack.
 #define dKernel_ContextSave() \
 asm volatile ("push SR\n" \
 	"push W0\n" \
@@ -45,9 +31,6 @@ asm volatile ("push SR\n" \
 	"push W0\n" \
 	"mov W15, _Task_CurrentStackLocation");
 
-// The last push W0 and first pop W0 is actual nesting index.
-
-// This pops all proccesor registers off the stack.
 #define dKernel_ContextRestore() \
 asm volatile ("mov _Task_CurrentStackLocation, W15\n" \
 	"pop W0\n" \
@@ -73,15 +56,8 @@ asm volatile ("mov _Task_CurrentStackLocation, W15\n" \
 	"pop SR\n" \
 	"return");
 
-#define dKernel_Suspend() asm volatile ( "CALL _Task_ChangeASM			\n"		\
-                                        "NOP					  " );
-
-inline void Kernel_ContextSave(void) { dKernel_ContextSave(); }
-inline void Kernel_ContextRestore(void) { dKernel_ContextRestore(); }
-inline void Kernel_Suspend(void) { dKernel_Suspend(); }
-
-void Kernel_InitializeStack(TritonTask_t* Task, int* stack, void* function);
+#define dKernel_Suspend() asm volatile (  "CALL _Task_ChangeASM\n" );
 
 #endif
 
-#endif /* KERNEL_H_ */
+#endif

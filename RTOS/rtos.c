@@ -1,4 +1,4 @@
-#include "rtos.h"
+#include "RTOS/rtos.h"
 #include "Drivers/uart.h"
 
 #ifdef RTOS_TRACE

@@ -1,19 +1,12 @@
-/*
- * timer.h
- *
- *  Created on: Jun 10, 2012
- *      Author: Hans
- */
-
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "portable.h"
+#include "RTOS/portable.h"
 
-#ifdef PORT__PIC24_H
+#ifdef TARGET_PIC24
 void Timer_OpenSysTimer(void);
 void Timer_StartSysTimer(void);
 void Timer_ClrSysTimerInt(void);
 #endif
 
-#endif /* TIMER_H_ */
+#endif

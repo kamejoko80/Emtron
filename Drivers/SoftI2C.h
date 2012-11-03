@@ -1,9 +1,9 @@
-#ifndef TRITON_SOFTI2C_H
-#define TRITON_SOFTI2C_H
+#ifndef EMTRON_DRIVERS_SOFTI2C_H
+#define EMTRON_DRIVERS_SOFTI2C_H
 
-#include "../portable.h"
-#include "../peripheral.h"
-#include "stddefs.h"
+#include "RTOS/portable.h"
+#include "RTOS/peripheral.h"
+#include "RTOS/stddefs.h"
 
 typedef struct SoftI2C_t* SoftI2C;
 
