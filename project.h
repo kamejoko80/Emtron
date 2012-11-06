@@ -9,4 +9,8 @@
 //#define RTOS_TRACE
 #define RTOS_TRACE_PORT 0
 
+#define RTOS_USE_EVENTS 0
+#define RTOS_USE_QUEUES 01
+#define RTOS_USE_MESSAGES 0
+
 #endif

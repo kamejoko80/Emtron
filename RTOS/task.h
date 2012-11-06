@@ -20,17 +20,26 @@ typedef enum TritonTaskState_e
 	TASK_RUNNING,
 	TASK_SUSPENDED,
 	TASK_SUSPENDING,
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
         TASK_WAITING,
+#endif
 	TASK_STOP
 } TritonTaskState_t;
 
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
 /**
  */
 typedef enum TritonTaskHelper_e
 {
-    TASKHELPER_EVENT,
-    TASKHELPER_MESSAGE,
-    TASKHELPER_QUEUE
+#ifdef RTOS_EVENTS_AVAILABLE
+    TASKHELPER_EVENT = 0x1,
+#endif
+#ifdef RTOS_MESSAGES_AVAILABLE
+    TASKHELPER_MESSAGE = 0x2,
+#endif
+#ifdef RTOS_QUEUES_AVAILABLE
+    TASKHELPER_QUEUE = 0x3
+#endif
 } TritonTaskHelper_t;
 
 /**
@@ -38,9 +47,15 @@ typedef enum TritonTaskHelper_e
  */
 typedef union
 {
+#ifdef RTOS_QUEUES_AVAILABLE
     TaskQueue_t* Queue;
+#endif
+#ifdef RTOS_EVENTS_AVAILABLE
     UI32_t Events;
+#endif
+#ifdef RTOS_MESSAGES_AVAILABLE
     UI32_t Message;
+#endif
 
     UI32_t __cmp;
 } TritonTaskState_WaitData_u;
@@ -51,6 +66,7 @@ typedef struct TritonTaskState_WaitData_s
     UI16_t timeout;
     TritonTaskState_WaitData_u data;
 } TritonTaskState_WaitData_t;
+#endif
 
 /**
  * Basic type for a task instance. Usage of linked list reduces initial memory usage and configuration.
@@ -81,8 +97,10 @@ typedef struct TritonTask_s
     //! State the task currently is in.
     TritonTaskState_t State;
 
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
     //! Task waiting arguments.
     TritonTaskState_WaitData_t State_WaitArgument;
+#endif
 
     //! Linked list reference to next task.
     struct TritonTask_s* NextTask;
@@ -109,7 +127,7 @@ void Task_Init(void);
  * @param Priority Integer value containing the priority of this task.
  * @return void
  */
-void Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority);
+void _Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority);
 
 /**
  * Suspend a task for a x time.
@@ -129,6 +147,7 @@ void Task_Sleep(Time_t time);
  */
 void Task_SleepUntil(Time_t time);
 
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
 /**
  * Suspends a task due to a task-helper calling for a wait procedure.
  * @return
@@ -140,6 +159,7 @@ UI08_t Task_Wait(TritonTaskState_WaitData_t argument);
  * @return
  */
 void Task_Signal(TritonTaskState_WaitData_t argument);
+#endif
 
 /**
  * Gets the current time.
@@ -163,4 +183,25 @@ void Kernel_InitializeStack(TritonTask_t* Task, int* stack, void* function);
 extern int* CurrentTaskStack ;
 extern UI16_t uxCriticalNesting;
 extern TritonTask_t* Task_Active;
+
+#define Task(name, stack_size, priority) TritonTask_t PASTE(Task_Inst_, name); \
+const UI08_t PASTE(Task_StackSize_, name) = stack_size; \
+const UI08_t PASTE(Task_Priority_, name) = priority; \
+UI08_t PASTE(Task_Stack_, name) [stack_size]; \
+void PASTE(Task_, name) (void)
+
+#define TaskProto(name, stack_size) void PASTE(Task_, name) (void); \
+extern TritonTask_t PASTE(Task_Inst_, name); \
+extern const UI08_t PASTE(Task_StackSize_, name); \
+extern const UI08_t PASTE(Task_Priority_, name); \
+extern UI08_t PASTE(Task_Stack_, name) [stack_size];
+
+#define Task_Register(name) _Task_Register( \
+    &PASTE(Task_Inst_, name),  \
+    STRINGIFY(name), \
+    (int*)PASTE(Task_Stack_, name), \
+    PASTE(Task_StackSize_, name), \
+    (void*)PASTE(Task_, name),  \
+    PASTE(Task_Priority_, name) \
+);
 #endif

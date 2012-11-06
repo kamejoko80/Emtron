@@ -151,4 +151,11 @@ typedef enum BitResolution_t
     RESOLUTION_16BIT
 } BitResolution_t;
 
+// Glue for several macro's:
+// http://stackoverflow.com/questions/806543/c-macros-manipulating-a-parameter-specific-example
+#define STRINGIFY2( x) #x
+#define STRINGIFY(x) STRINGIFY2(x)
+#define PASTE_( a, b) a##b
+#define PASTE( a, b) PASTE_( a, b)
+
 #endif

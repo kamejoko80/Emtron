@@ -1,5 +1,6 @@
 #include "RTOS/taskQueue.h"
 
+#ifdef RTOS_QUEUES_AVAILABLE
 void TaskQueue_Create(TaskQueue_t* queue, void* buffer, UI16_t items, UI16_t size)
 {
     m_CircularBuffer_Reset(queue, items*size);
@@ -54,3 +55,4 @@ UI08_t TaskQueue_WaitPeriod(TaskQueue_t* queue, void* data, UI16_t time)
     }
 
 }
+#endif

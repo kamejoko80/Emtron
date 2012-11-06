@@ -3,12 +3,15 @@
 #ifdef TARGET_PIC24
 void Timer_OpenSysTimer(void)
 {
-    T1CON = 0;//off
-    TMR1=0;//reset
+    T1CON = 0;
+    TMR1=0;
+
     PR1=CLOCK_PERIPHERAL/1000; // 1kHz
-    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt for desired priority level
-    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
-    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
+
+    Timer_ClrSysTimerInt();
+    IPC0bits.T1IP = 0x01; // Priority level
+    IEC0bits.T1IE = 1; // Enable Timer1 interrupts
+    
     T1CONbits.TCKPS = 0b00; // No prescale
 }
 

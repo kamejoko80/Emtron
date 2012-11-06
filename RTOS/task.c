@@ -8,29 +8,27 @@ TritonTask_t* Task_Next;
 
 UI16_t Task_CurrentStackLocation;
 UI08_t Task_ActiveID;
-Time_t Task_CurrentTime;
+Time_t Task_CurrentTime = 10;
 
 // TODO: Replace with portable code
 UI16_t uxCriticalNesting = 0;
 
 // local functions
-
 TritonTask_t* Task_GetTask(int depth);
 void Task_FindNext(void);
-
-/**** IDlE TASK ****/
-int Task_Idle_Stack[48];
-TritonTask_t Task_Idle;
 
 /**
  * Idle task of the RTOS.
  * Idle task of the RTOS could be used to bring the microcontroller into sleep. Please make sure that the portable supports timer interrupts whilst sleep.
  */
-void Task_Idle_Loop(void)
+//TritonTask_t Task_Idle_Inst;
+//UI08_t Task_Idle_Stack[128];
+//void Task_Idle(void)
+Task(Idle, 128, 0)
 {
     while(1)
     {
-       asm volatile("PWRSAV #1");//enter idle mode, wakeup by interrupt.
+        asm volatile("PWRSAV #1");//enter idle mode, wakeup by interrupt.
     }
 }
 
@@ -46,7 +44,6 @@ void Task_Init(void)
         RTOS_Trace(RTOS_TRACE_TASK_START, 0, null);
     #endif
 
-    // TODO: Replace with portable code.
     Task_Tmp = (TritonTask_t*) 0;
     Task_Top = (TritonTask_t*) 0;
     Task_Next = (TritonTask_t*) 0;
@@ -56,7 +53,8 @@ void Task_Init(void)
     Timer_OpenSysTimer();
 
     // Register idle task
-    Task_Register(&Task_Idle, "Idle", Task_Idle_Stack, 36, Task_Idle_Loop, 0);
+    //_Task_Register(&Task_Idle_Inst, "Idle", (int*)Task_Idle_Stack, 128, Task_Idle, 0);
+    Task_Register(Idle);
 
 }
 void Task_Start(void)
@@ -74,31 +72,37 @@ TritonTask_t* Task_GetTask(int depth)
     // get the active task
     TritonTask_t* ref = Task_Top;
 
-    while(--depth >= 0)
+    while(--depth >= 0 && ref->NextTask != 0)
         ref = ref->NextTask;
 
     return ref;
 }
 
-void Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority)
+void _Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority)
 {
-	memset(task, 0, sizeof(TritonTask_t));
-	Kernel_InitializeStack(task, Stack, Method);
-	task->StackSize = StackSize;
-	task->Priority = Priority;
-	task->NextTask = 0;
-	
-	// Make top task or add to linkedlist?
-	if(Task_Top == 0x0000)
-		Task_Top = task;
-	else
-	{
-		Task_Tmp = Task_Top;
-		while(Task_Tmp->NextTask != 0)
-			Task_Tmp = Task_Tmp->NextTask;
-		Task_Tmp->NextTask = task;
-                task->ID = Task_Tmp->ID+1;
-	}
+    memset(task, 0, sizeof(TritonTask_t));
+    Kernel_InitializeStack(task, Stack, Method);
+    task->StackSize = StackSize;
+    task->Priority = Priority;
+    task->NextTask = 0;
+    task->State = TASK_SUSPENDED;
+
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
+    Task_Tmp->State_WaitArgument.timeout = 0;
+    Task_Tmp->State_WaitArgument.timedout = 0;
+#endif
+
+    // Make top task or add to linkedlist?
+    if(Task_Top == 0x0000)
+            Task_Top = task;
+    else
+    {
+            Task_Tmp = Task_Top;
+            while(Task_Tmp->NextTask != 0)
+                    Task_Tmp = Task_Tmp->NextTask;
+            Task_Tmp->NextTask = task;
+            task->ID = Task_Tmp->ID+1;
+    }
 
 #ifdef RTOS_TRACE
     RTOS_Trace(RTOS_TRACE_TASK_REGISTER, sizeof(TritonTask_t), task);
@@ -130,8 +134,10 @@ void Task_FindNext(void)
 	{
 		if(Task_Tmp->RunNext <= Task_CurrentTime)
 		{
+                    // If wait states is DISABLED, then this is much simpler:
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
                     if (Task_Tmp->State == TASK_SUSPENDED
-                            || Task_Tmp->State == TASK_RUNNING)
+                     || Task_Tmp->State == TASK_RUNNING)
                     {
 			// Is this task of higher priority? Then set as next.
 			if (Task_Tmp->Priority > Task_Next->Priority)
@@ -144,12 +150,19 @@ void Task_FindNext(void)
 			if (Task_Tmp->Priority > Task_Next->Priority)
 				Task_Next = Task_Tmp;
                     }
+#else
+			// Is this task of higher priority? Then set as next.
+			if (Task_Tmp->Priority > Task_Next->Priority)
+				Task_Next = Task_Tmp;
+#endif
+
 		}
 		Task_Tmp = Task_Tmp->NextTask;
 	}
 	while(Task_Tmp != 0);
 }
 
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
 UI08_t Task_Wait(TritonTaskState_WaitData_t argument)
 {
     Task_Active->State_WaitArgument = argument;
@@ -184,12 +197,21 @@ void Task_Signal(TritonTaskState_WaitData_t argument)
     }
     while(Task_Tmp != 0);
 }
+#endif
 
 void Task_Sleep(Time_t time)
 {
 	Task_Active->RunNext = Task_CurrentTime + time;
 	Task_Active->State = TASK_SUSPENDING;
-	
+
+	Kernel_Suspend();
+}
+
+void Task_SleepUntil(Time_t time)
+{
+	Task_Active->RunNext = time;
+	Task_Active->State = TASK_SUSPENDING;
+
 	Kernel_Suspend();
 }
 
@@ -201,6 +223,7 @@ void Task_Change(void)
 	if(Task_Active->RunNext < Task_Active->RunLast)
 		Task_Active->RunNext = Task_CurrentTime+1;
 
+#ifdef RTOS_TASK_WAIT_STATE_ENABLED
 	if(Task_Active->State == TASK_SUSPENDING
                 || Task_Active->State == TASK_WAITING)
 	{
@@ -213,6 +236,19 @@ void Task_Change(void)
             Task_Active->State = TASK_SUSPENDED;
             Task_FindNextTask();
 	}
+#else
+	if(Task_Active->State == TASK_SUSPENDING)
+	{
+            Task_Active->State = TASK_SUSPENDED;
+            Task_FindBestTask();
+	}
+        else
+	{
+            Task_Active->State = TASK_SUSPENDED;
+            Task_FindNextTask();
+	}
+#endif
+
         #ifdef RTOS_TRACE
         if(Task_Next->ID != Task_Active->ID)
         {

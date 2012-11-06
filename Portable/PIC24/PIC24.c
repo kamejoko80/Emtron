@@ -34,7 +34,7 @@ const IOPort_t IOPorts[NUM_PORTS] = {
 void FW_Init(void)
 {
     // Initialize the CPU clock.
-    //CLKDIV  = CFG_RCDIV << 8;
+    CLKDIV  = CFG_RCDIV << 8;
 
     #if NUM_PORTS >= 7 // TODO: When does AD1PCFG go to AD1PCFGL and AD1PCFGH?
     AD1PCFGL = 0xFFFF;
