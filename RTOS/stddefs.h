@@ -137,7 +137,6 @@ typedef struct IOPort_s
 #define GPIO_Write1(port, pin) *(IOPorts[IO_##port].LAT) |=  (1U << pin);
 #define GPIO_Write0(port, pin) *(IOPorts[IO_##port].LAT)  &= ~(1U << pin);
 
-
 typedef enum BitResolution_t
 {
     RESOLUTION_8BIT,

@@ -34,7 +34,8 @@ const IOPort_t IOPorts[NUM_PORTS] = {
 void FW_Init(void)
 {
     // Initialize the CPU clock.
-    CLKDIV  = CFG_RCDIV << 8;
+    //CLKDIV  = CFG_RCDIV << 8;
+    CLKDIV = 0;
 
     #if NUM_PORTS >= 7 // TODO: When does AD1PCFG go to AD1PCFGL and AD1PCFGH?
     AD1PCFGL = 0xFFFF;
@@ -43,12 +44,14 @@ void FW_Init(void)
         AD1PCFG = 0xFFFF;
     #endif
 
-    #if HARDWARE_LEDCOUNT > 0
-    int i=0;
-    for (i = 0 ; i < HARDWARE_LEDCOUNT; i++)
-    {
-        SGPIO_Direction(LEDs[i].port, LEDs[i].pin, OUTPUT);
-    }
+    #ifdef HARDWARE_LEDCOUNT
+        #if HARDWARE_LEDCOUNT > 0
+        int i=0;
+        for (i = 0 ; i < HARDWARE_LEDCOUNT; i++)
+        {
+            SGPIO_Direction(LEDs[i].port, LEDs[i].pin, OUTPUT);
+        }
+        #endif
     #endif
 }
 

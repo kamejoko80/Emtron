@@ -65,6 +65,7 @@
     #ifdef PORTABLE_PIC24FJGA00x
     #include "Portable/PIC24/PIC24FJGA00x.h"
     #endif
+extern const IOPort_t IOPorts[NUM_PORTS];
 
     #include "Portable/PIC24/kernel.h"
     #include "Portable/PIC24/timer.h"

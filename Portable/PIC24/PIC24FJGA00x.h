@@ -45,10 +45,10 @@
         #ifdef OSC_INT_32MHZ
             #define CFG_RCDIV 0
             #ifdef MAIN_C
-                _CONFIG1(WDTPS_PS1 & FWPSA_PR32 & WINDIS_OFF & FWDTEN_OFF & ICS_PGx1 & GWRP_OFF & GCP_OFF & JTAGEN_OFF)
-                _CONFIG2(POSCMOD_NONE & OSCIOFNC_ON & FCKSM_CSDCMD & FNOSC_FRCPLL & IESO_ON & PORTABLE_CONFIG2)
+                _CONFIG1(WINDIS_OFF & FWDTEN_OFF & ICS_PGx1 & GWRP_OFF & GCP_OFF & JTAGEN_OFF)
+                _CONFIG2(POSCMOD_NONE & OSCIOFNC_OFF & FCKSM_CSDCMD & FNOSC_FRCPLL & IESO_OFF & PORTABLE_CONFIG2)
             #endif
-            #define CLOCK_CPU 4000000
+            #define CLOCK_CPU 32000000
             #define CLOCK_PERIPHERAL CLOCK_CPU/2
         #endif
     #endif
@@ -60,8 +60,6 @@
         PERIPHERAL_SOFTSPI,
         PERIPHERAL_SOFTI2C
     } PeripheralType_t;
-
-    extern const IOPort_t IOPorts[NUM_PORTS];
 
 #endif
 

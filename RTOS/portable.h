@@ -21,6 +21,7 @@
 #define INPUT GPIO_Direction_Input
 #define OUTPUT GPIO_Direction_Output
 
+
 void FW_Init(void);
 
 inline void Kernel_ContextSave(void);
