@@ -3,6 +3,7 @@
 
 #include "RTOS/task.h"
 
-TaskProto(Task2, 128);
+TaskProto(Task1, 4000);
+TaskProto(Task2, 4000);
 
 #endif

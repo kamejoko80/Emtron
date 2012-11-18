@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv1_00 (A) 6
+Microchip Technology Inc, vv1_00 (A) e
 
 Tool Name:
   c:\program files (x86)\microchip\xc16\v1.00\bin\bin\..\bin/elf-ld.exe
@@ -21,6 +21,7 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.00/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.00/bin/bin/../../lib/dsPIC33F \
   -Lc:/program files (x86)/microchip/xc16/v1.00/bin/bin/../../support/dsPIC33F/gld \
+  build/default/production/_ext/1543948142/GraphicDisplay.o \
   build/default/production/_ext/1015565369/kernel.o \
   build/default/production/_ext/1015565369/timer.o \
   build/default/production/_ext/1015565369/uart.o \
@@ -30,7 +31,6 @@ Command:
   build/default/production/_ext/761631083/task.o \
   build/default/production/_ext/761631083/taskQueue.o \
   build/default/production/_ext/1472/main.o \
-  build/default/production/_ext/1543948142/GraphicDisplay.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FJ64GA002.gld.00 \
   --stack=16 \
@@ -66,23 +66,24 @@ Program Memory  [Origin = 0x200, Length = 0xa9fa]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xa0            0xf0  (240)
-.const                       0x2a0                0x52            0x7b  (123)
-.text                        0x2f2               0x69a           0x9e7  (2535)
-../Portable/PIC24/task_switch.s.scn1     0x98c                0x4c            0x72  (114)
-.text                        0x9d8                0x42            0x63  (99)
-.dinit                       0xa1a                0x18            0x24  (36)
+.const                       0x2a0                0x68            0x9c  (156)
+.text                        0x308               0x88e           0xcd5  (3285)
+../Portable/PIC24/task_switch.s.scn1     0xb96                0x4c            0x72  (114)
+.text                        0xbe2                0x26            0x39  (57)
+.dinit                       0xc08                0x20            0x30  (48)
+.text                        0xc28                0x1c            0x2a  (42)
 
-                     Total program memory used (bytes):          0xc4b  (3147) 4%
+                     Total program memory used (bytes):          0xf66  (3942) 6%
 
 
 Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0           0x22a  (554)
-.ndata                       0xa2a                   0             0x6  (6)
+.nbss                        0x800                   0           0x61e  (1566)
+.ndata                       0xe1e                   0             0x8  (8)
 
-                        Total data memory used (bytes):          0x230  (560) 6%
+                        Total data memory used (bytes):          0x626  (1574) 19%
 
 
 Dynamic Memory Usage
@@ -90,158 +91,172 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xa30                              0x1dd0  (7632)
+stack                        0xe26                              0x19da  (6618)
 
-                        Maximum dynamic memory (bytes):         0x1dd0  (7632)
+                        Maximum dynamic memory (bytes):         0x19da  (6618)
 
 
 External Symbols in Data Memory (by address):
 
                     0x0800                  _Task_Inst_Task2
                     0x0824                  _Task_Stack_Task2
-                    0x08a4                  _Dsp
-                    0x08c2                  _ButtonQueue
-                    0x08ce                  _ButtonQueueBf
-                    0x08d6                  _Task_Inst_Task1
-                    0x08fa                  _Task_Stack_Task1
-                    0x097a                  _Task_Active
-                    0x097c                  _Task_Top
-                    0x097e                  _Task_Tmp
-                    0x0980                  _Task_Next
-                    0x0982                  _Task_CurrentStackLocation
-                    0x0984                  _Task_ActiveID
-                    0x0986                  _Task_Inst_Idle
-                    0x09aa                  _Task_Stack_Idle
-                    0x0a2a                  _Task_CurrentTime
-                    0x0a2e                  _uxCriticalNesting
+                    0x08a4                  _DisplayBuffer1
+                    0x0ca4                  _Dsp
+                    0x0cb6                  _ButtonQueue
+                    0x0cc2                  _ButtonQueueBf
+                    0x0cca                  _Task_Inst_Task1
+                    0x0cee                  _Task_Stack_Task1
+                    0x0d6e                  _Task_Active
+                    0x0d70                  _Task_Top
+                    0x0d72                  _Task_Tmp
+                    0x0d74                  _Task_Next
+                    0x0d76                  _Task_CurrentStackLocation
+                    0x0d78                  _Task_ActiveID
+                    0x0d7a                  _Task_Inst_Idle
+                    0x0d9e                  _Task_Stack_Idle
+                    0x0e1e                  _Task_CurrentTime
+                    0x0e22                  _uxCriticalNesting
+                    0x0e24                  _l
 
 External Symbols in Data Memory (by name):
 
-                    0x08c2                  _ButtonQueue
-                    0x08ce                  _ButtonQueueBf
-                    0x08a4                  _Dsp
-                    0x097a                  _Task_Active
-                    0x0984                  _Task_ActiveID
-                    0x0982                  _Task_CurrentStackLocation
-                    0x0a2a                  _Task_CurrentTime
-                    0x0986                  _Task_Inst_Idle
-                    0x08d6                  _Task_Inst_Task1
+                    0x0cb6                  _ButtonQueue
+                    0x0cc2                  _ButtonQueueBf
+                    0x08a4                  _DisplayBuffer1
+                    0x0ca4                  _Dsp
+                    0x0d6e                  _Task_Active
+                    0x0d78                  _Task_ActiveID
+                    0x0d76                  _Task_CurrentStackLocation
+                    0x0e1e                  _Task_CurrentTime
+                    0x0d7a                  _Task_Inst_Idle
+                    0x0cca                  _Task_Inst_Task1
                     0x0800                  _Task_Inst_Task2
-                    0x0980                  _Task_Next
-                    0x09aa                  _Task_Stack_Idle
-                    0x08fa                  _Task_Stack_Task1
+                    0x0d74                  _Task_Next
+                    0x0d9e                  _Task_Stack_Idle
+                    0x0cee                  _Task_Stack_Task1
                     0x0824                  _Task_Stack_Task2
-                    0x097e                  _Task_Tmp
-                    0x097c                  _Task_Top
-                    0x0a2e                  _uxCriticalNesting
+                    0x0d72                  _Task_Tmp
+                    0x0d70                  _Task_Top
+                    0x0e24                  _l
+                    0x0e22                  _uxCriticalNesting
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x000222                  __psv_init
-                  0x000232                  __data_init_standard
                   0x000232                  __data_init
+                  0x000232                  __data_init_standard
                   0x00029c                  __DefaultInterrupt
-                  0x0002a0                  _PIC24_InitialStack
-                  0x0002c0                  _LEDs
-                  0x0002c2                  _IOPorts
-                  0x0002de                  _Task_StackSize_Task1
-                  0x0002df                  _Task_Priority_Task1
-                  0x0002e0                  _Task_StackSize_Task2
-                  0x0002e1                  _Task_Priority_Task2
-                  0x0002e7                  _Task_StackSize_Idle
-                  0x0002e8                  _Task_Priority_Idle
-                  0x0002ea                  _DISPLAY_SED1565
-                  0x0002f2                  _Task_Idle
-                  0x0002f6                  _Task_Start
-                  0x000304                  _Task_GetTask
-                  0x00031c                  __Task_Register
-                  0x000388                  _Task_Init
-                  0x0003a8                  _Task_FindNext
-                  0x0003f2                  _Task_FindNextTask
-                  0x0003fe                  _Task_FindBestTask
-                  0x000408                  _Task_Wait
-                  0x00043a                  _Task_Signal
-                  0x00047a                  _Task_Sleep
-                  0x000490                  _Task_SleepUntil
-                  0x00049e                  _Task_Change
-                  0x0004e6                  __T1Interrupt
-                  0x000514                  _GraphicDisplay_Init
-                  0x00051c                  _GraphicDisplay_GPIO
-                  0x00059e                  _GraphicDisplay_Write
-                  0x000664                  _GraphicDisplay_Test
-                  0x0006cc                  _GraphicDisplay_Clear
-                  0x0006d6                  _GraphicDisplay_Power
-                  0x000700                  _Task_Task2
-                  0x000730                  _Task_Task1
-                  0x00076a                  _main
-                  0x00081c                  _TaskQueue_Create
-                  0x000830                  _TaskQueue_Add
-                  0x000866                  _TaskQueue_WaitPeriod
-                  0x0008ea                  _TaskQueue_Wait
-                  0x0008f2                  _Kernel_InitializeStack
-                  0x000924                  _Kernel_ContextSave
-                  0x000956                  _Kernel_ContextRestore
-                  0x000986                  _Kernel_Suspend
-                  0x00098c                  _Task_ChangeASM
-                  0x0009d8                  _Timer_StartSysTimer
-                  0x0009dc                  _Timer_ClrSysTimerInt
-                  0x0009e0                  _Timer_OpenSysTimer
-                  0x0009fe                  _FW_Init
+                  0x0002ac                  _GPIO_LCD1
+                  0x0002c2                  _Task_StackSize_Task1
+                  0x0002c3                  _Task_Priority_Task1
+                  0x0002c4                  _Task_StackSize_Task2
+                  0x0002c5                  _Task_Priority_Task2
+                  0x0002c6                  _PIC24_InitialStack
+                  0x0002e6                  _LEDs
+                  0x0002e8                  _IOPorts
+                  0x0002f8                  _DISPLAY_SED1565
+                  0x000305                  _Task_StackSize_Idle
+                  0x000306                  _Task_Priority_Idle
+                  0x000308                  _GraphicDisplay_SetIODirection
+                  0x000380                  _GraphicDisplay_Init
+                  0x00040a                  _GraphicDisplay_Write
+                  0x0004e8                  _GraphicDisplay_Goto
+                  0x000524                  _GraphicDisplay_Clear
+                  0x00052e                  _GraphicDisplay_Power
+                  0x00055a                  _GraphicDisplay_Read
+                  0x00061a                  _GraphicDisplay_ReadPixel
+                  0x000638                  _GraphicDisplay_WritePixel
+                  0x000680                  _GraphicDisplay_Test
+                  0x000734                  _Task_Idle
+                  0x000738                  _Task_Start
+                  0x000746                  _Task_GetTask
+                  0x00075e                  __Task_Register
+                  0x0007ca                  _Task_Init
+                  0x0007ea                  _Task_FindNext
+                  0x000834                  _Task_FindNextTask
+                  0x000840                  _Task_FindBestTask
+                  0x00084a                  _Task_Wait
+                  0x00087c                  _Task_Signal
+                  0x0008bc                  _Task_Sleep
+                  0x0008d2                  _Task_SleepUntil
+                  0x0008e0                  _Task_Change
+                  0x000928                  __T1Interrupt
+                  0x000956                  _TaskQueue_Create
+                  0x00096a                  _TaskQueue_Add
+                  0x0009a0                  _TaskQueue_WaitPeriod
+                  0x000a24                  _TaskQueue_Wait
+                  0x000a2c                  _Task_Task2
+                  0x000a6a                  _Task_Task1
+                  0x000ab6                  _main
+                  0x000afc                  _Kernel_InitializeStack
+                  0x000b2e                  _Kernel_ContextSave
+                  0x000b60                  _Kernel_ContextRestore
+                  0x000b90                  _Kernel_Suspend
+                  0x000b96                  _Task_ChangeASM
+                  0x000be2                  _Timer_StartSysTimer
+                  0x000be6                  _Timer_ClrSysTimerInt
+                  0x000bea                  _Timer_OpenSysTimer
+                  0x000c28                  _FW_Init
 
 External Symbols in Program Memory (by name):
 
-                  0x0002ea                  _DISPLAY_SED1565
-                  0x0009fe                  _FW_Init
-                  0x0006cc                  _GraphicDisplay_Clear
-                  0x00051c                  _GraphicDisplay_GPIO
-                  0x000514                  _GraphicDisplay_Init
-                  0x0006d6                  _GraphicDisplay_Power
-                  0x000664                  _GraphicDisplay_Test
-                  0x00059e                  _GraphicDisplay_Write
-                  0x0002c2                  _IOPorts
-                  0x000956                  _Kernel_ContextRestore
-                  0x000924                  _Kernel_ContextSave
-                  0x0008f2                  _Kernel_InitializeStack
-                  0x000986                  _Kernel_Suspend
-                  0x0002c0                  _LEDs
-                  0x0002a0                  _PIC24_InitialStack
-                  0x000830                  _TaskQueue_Add
-                  0x00081c                  _TaskQueue_Create
-                  0x0008ea                  _TaskQueue_Wait
-                  0x000866                  _TaskQueue_WaitPeriod
-                  0x00049e                  _Task_Change
-                  0x00098c                  _Task_ChangeASM
-                  0x0003fe                  _Task_FindBestTask
-                  0x0003a8                  _Task_FindNext
-                  0x0003f2                  _Task_FindNextTask
-                  0x000304                  _Task_GetTask
-                  0x0002f2                  _Task_Idle
-                  0x000388                  _Task_Init
-                  0x0002e8                  _Task_Priority_Idle
-                  0x0002df                  _Task_Priority_Task1
-                  0x0002e1                  _Task_Priority_Task2
-                  0x00043a                  _Task_Signal
-                  0x00047a                  _Task_Sleep
-                  0x000490                  _Task_SleepUntil
-                  0x0002e7                  _Task_StackSize_Idle
-                  0x0002de                  _Task_StackSize_Task1
-                  0x0002e0                  _Task_StackSize_Task2
-                  0x0002f6                  _Task_Start
-                  0x000730                  _Task_Task1
-                  0x000700                  _Task_Task2
-                  0x000408                  _Task_Wait
-                  0x0009dc                  _Timer_ClrSysTimerInt
-                  0x0009e0                  _Timer_OpenSysTimer
-                  0x0009d8                  _Timer_StartSysTimer
+                  0x0002f8                  _DISPLAY_SED1565
+                  0x000c28                  _FW_Init
+                  0x0002ac                  _GPIO_LCD1
+                  0x000524                  _GraphicDisplay_Clear
+                  0x0004e8                  _GraphicDisplay_Goto
+                  0x000380                  _GraphicDisplay_Init
+                  0x00052e                  _GraphicDisplay_Power
+                  0x00055a                  _GraphicDisplay_Read
+                  0x00061a                  _GraphicDisplay_ReadPixel
+                  0x000308                  _GraphicDisplay_SetIODirection
+                  0x000680                  _GraphicDisplay_Test
+                  0x00040a                  _GraphicDisplay_Write
+                  0x000638                  _GraphicDisplay_WritePixel
+                  0x0002e8                  _IOPorts
+                  0x000b60                  _Kernel_ContextRestore
+                  0x000b2e                  _Kernel_ContextSave
+                  0x000afc                  _Kernel_InitializeStack
+                  0x000b90                  _Kernel_Suspend
+                  0x0002e6                  _LEDs
+                  0x0002c6                  _PIC24_InitialStack
+                  0x00096a                  _TaskQueue_Add
+                  0x000956                  _TaskQueue_Create
+                  0x000a24                  _TaskQueue_Wait
+                  0x0009a0                  _TaskQueue_WaitPeriod
+                  0x0008e0                  _Task_Change
+                  0x000b96                  _Task_ChangeASM
+                  0x000840                  _Task_FindBestTask
+                  0x0007ea                  _Task_FindNext
+                  0x000834                  _Task_FindNextTask
+                  0x000746                  _Task_GetTask
+                  0x000734                  _Task_Idle
+                  0x0007ca                  _Task_Init
+                  0x000306                  _Task_Priority_Idle
+                  0x0002c3                  _Task_Priority_Task1
+                  0x0002c5                  _Task_Priority_Task2
+                  0x00087c                  _Task_Signal
+                  0x0008bc                  _Task_Sleep
+                  0x0008d2                  _Task_SleepUntil
+                  0x000305                  _Task_StackSize_Idle
+                  0x0002c2                  _Task_StackSize_Task1
+                  0x0002c4                  _Task_StackSize_Task2
+                  0x000738                  _Task_Start
+                  0x000a6a                  _Task_Task1
+                  0x000a2c                  _Task_Task2
+                  0x00084a                  _Task_Wait
+                  0x000be6                  _Timer_ClrSysTimerInt
+                  0x000bea                  _Timer_OpenSysTimer
+                  0x000be2                  _Timer_StartSysTimer
                   0x00029c                  __DefaultInterrupt
-                  0x0004e6                  __T1Interrupt
-                  0x00031c                  __Task_Register
+                  0x000928                  __T1Interrupt
+                  0x00075e                  __Task_Register
                   0x000232                  __data_init
                   0x000232                  __data_init_standard
                   0x000222                  __psv_init
                   0x000200                  __resetPRI
-                  0x00076a                  _main
+                  0x000ab6                  _main
 
 Memory Configuration
 
@@ -258,6 +273,7 @@ CONFIG1          0x00abfe           0x000002
 
 Linker script and memory map
 
+LOAD build/default/production/_ext/1543948142/GraphicDisplay.o
 LOAD build/default/production/_ext/1015565369/kernel.o
 LOAD build/default/production/_ext/1015565369/timer.o
 LOAD build/default/production/_ext/1015565369/uart.o
@@ -267,7 +283,6 @@ LOAD build/default/production/_ext/761631083/rtos.o
 LOAD build/default/production/_ext/761631083/task.o
 LOAD build/default/production/_ext/761631083/taskQueue.o
 LOAD build/default/production/_ext/1472/main.o
-LOAD build/default/production/_ext/1543948142/GraphicDisplay.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD c:/program files (x86)/microchip/xc16/v1.00/bin/bin/../../lib/PIC24F\libpPIC24Fxxx-elf.a
                     0xabfc                  __CONFIG2 = 0xabfc
@@ -362,7 +377,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000014          0x4 LONG 0x29c DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x29c DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x29c DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x4e6 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x928 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x29c DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x29c DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x29c DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -490,7 +505,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000114          0x4 LONG 0x29c DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x29c DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x29c DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x4e6 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x928 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x29c DEFINED (__AltInterrupt4)?ABSOLUTE (__AltInterrupt4):DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x29c DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x29c DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1193,98 +1208,108 @@ LOAD data_init
 
 __c30_signature
 
-.nbss               0x0800        0x22a
- .nbss              0x0800        0x17a build/default/production/_ext/1472/main.o
+.nbss               0x0800        0x61e
+ .nbss              0x0800        0x56e build/default/production/_ext/1472/main.o
                     0x0800                  _Task_Inst_Task2
                     0x0824                  _Task_Stack_Task2
-                    0x08a4                  _Dsp
-                    0x08c2                  _ButtonQueue
-                    0x08ce                  _ButtonQueueBf
-                    0x08d6                  _Task_Inst_Task1
-                    0x08fa                  _Task_Stack_Task1
- .nbss              0x097a         0xb0 build/default/production/_ext/761631083/task.o
-                    0x097a                  _Task_Active
-                    0x097c                  _Task_Top
-                    0x097e                  _Task_Tmp
-                    0x0980                  _Task_Next
-                    0x0982                  _Task_CurrentStackLocation
-                    0x0984                  _Task_ActiveID
-                    0x0986                  _Task_Inst_Idle
-                    0x09aa                  _Task_Stack_Idle
+                    0x08a4                  _DisplayBuffer1
+                    0x0ca4                  _Dsp
+                    0x0cb6                  _ButtonQueue
+                    0x0cc2                  _ButtonQueueBf
+                    0x0cca                  _Task_Inst_Task1
+                    0x0cee                  _Task_Stack_Task1
+ .nbss              0x0d6e         0xb0 build/default/production/_ext/761631083/task.o
+                    0x0d6e                  _Task_Active
+                    0x0d70                  _Task_Top
+                    0x0d72                  _Task_Tmp
+                    0x0d74                  _Task_Next
+                    0x0d76                  _Task_CurrentStackLocation
+                    0x0d78                  _Task_ActiveID
+                    0x0d7a                  _Task_Inst_Idle
+                    0x0d9e                  _Task_Stack_Idle
 
-.ndata              0x0a2a          0x6
- .ndata             0x0a2a          0x6 build/default/production/_ext/761631083/task.o
-                    0x0a2a                  _Task_CurrentTime
-                    0x0a2e                  _uxCriticalNesting
+.ndata              0x0e1e          0x8
+ .ndata             0x0e1e          0x6 build/default/production/_ext/761631083/task.o
+                    0x0e1e                  _Task_CurrentTime
+                    0x0e22                  _uxCriticalNesting
+ .ndata             0x0e24          0x2 build/default/production/_ext/1543948142/GraphicDisplay.o
+                    0x0e24                  _l
 
-.const              0x82a0         0x52 load address 0x0002a0  
- .const             0x82a0         0x20 build/default/production/_ext/1015565369/kernel.o
-                    0x82a0                  _PIC24_InitialStack
- .const             0x82c0         0x12 build/default/production/_ext/1015565369/PIC24.o
-                    0x82c0                  _LEDs
-                    0x82c2                  _IOPorts
- .const             0x82d2         0x10 build/default/production/_ext/1472/main.o
-                    0x82de                  _Task_StackSize_Task1
-                    0x82df                  _Task_Priority_Task1
-                    0x82e0                  _Task_StackSize_Task2
-                    0x82e1                  _Task_Priority_Task2
- .const             0x82e2          0x8 build/default/production/_ext/761631083/task.o
-                    0x82e7                  _Task_StackSize_Idle
-                    0x82e8                  _Task_Priority_Idle
- .const             0x82ea          0x8 build/default/production/_ext/1543948142/GraphicDisplay.o
-                    0x82ea                  _DISPLAY_SED1565
+.const              0x82a0         0x68 load address 0x0002a0  
+ .const             0x82a0         0x26 build/default/production/_ext/1472/main.o
+                    0x82ac                  _GPIO_LCD1
+                    0x82c2                  _Task_StackSize_Task1
+                    0x82c3                  _Task_Priority_Task1
+                    0x82c4                  _Task_StackSize_Task2
+                    0x82c5                  _Task_Priority_Task2
+ .const             0x82c6         0x20 build/default/production/_ext/1015565369/kernel.o
+                    0x82c6                  _PIC24_InitialStack
+ .const             0x82e6         0x12 build/default/production/_ext/1015565369/PIC24.o
+                    0x82e6                  _LEDs
+                    0x82e8                  _IOPorts
+ .const             0x82f8          0x8 build/default/production/_ext/1543948142/GraphicDisplay.o
+                    0x82f8                  _DISPLAY_SED1565
+ .const             0x8300          0x8 build/default/production/_ext/761631083/task.o
+                    0x8305                  _Task_StackSize_Idle
+                    0x8306                  _Task_Priority_Idle
 
-.text             0x0002f2        0x69a
- .text            0x0002f2        0x222 build/default/production/_ext/761631083/task.o
-                  0x0002f2                  _Task_Idle
-                  0x0002f6                  _Task_Start
-                  0x000304                  _Task_GetTask
-                  0x00031c                  __Task_Register
-                  0x000388                  _Task_Init
-                  0x0003a8                  _Task_FindNext
-                  0x0003f2                  _Task_FindNextTask
-                  0x0003fe                  _Task_FindBestTask
-                  0x000408                  _Task_Wait
-                  0x00043a                  _Task_Signal
-                  0x00047a                  _Task_Sleep
-                  0x000490                  _Task_SleepUntil
-                  0x00049e                  _Task_Change
-                  0x0004e6                  __T1Interrupt
- .text            0x000514        0x1ec build/default/production/_ext/1543948142/GraphicDisplay.o
-                  0x000514                  _GraphicDisplay_Init
-                  0x00051c                  _GraphicDisplay_GPIO
-                  0x00059e                  _GraphicDisplay_Write
-                  0x000664                  _GraphicDisplay_Test
-                  0x0006cc                  _GraphicDisplay_Clear
-                  0x0006d6                  _GraphicDisplay_Power
- .text            0x000700        0x11c build/default/production/_ext/1472/main.o
-                  0x000700                  _Task_Task2
-                  0x000730                  _Task_Task1
-                  0x00076a                  _main
- .text            0x00081c         0xd6 build/default/production/_ext/761631083/taskQueue.o
-                  0x00081c                  _TaskQueue_Create
-                  0x000830                  _TaskQueue_Add
-                  0x000866                  _TaskQueue_WaitPeriod
-                  0x0008ea                  _TaskQueue_Wait
- .text            0x0008f2         0x9a build/default/production/_ext/1015565369/kernel.o
-                  0x0008f2                  _Kernel_InitializeStack
-                  0x000924                  _Kernel_ContextSave
-                  0x000956                  _Kernel_ContextRestore
-                  0x000986                  _Kernel_Suspend
+.text             0x000308        0x88e
+ .text            0x000308        0x42c build/default/production/_ext/1543948142/GraphicDisplay.o
+                  0x000308                  _GraphicDisplay_SetIODirection
+                  0x000380                  _GraphicDisplay_Init
+                  0x00040a                  _GraphicDisplay_Write
+                  0x0004e8                  _GraphicDisplay_Goto
+                  0x000524                  _GraphicDisplay_Clear
+                  0x00052e                  _GraphicDisplay_Power
+                  0x00055a                  _GraphicDisplay_Read
+                  0x00061a                  _GraphicDisplay_ReadPixel
+                  0x000638                  _GraphicDisplay_WritePixel
+                  0x000680                  _GraphicDisplay_Test
+ .text            0x000734        0x222 build/default/production/_ext/761631083/task.o
+                  0x000734                  _Task_Idle
+                  0x000738                  _Task_Start
+                  0x000746                  _Task_GetTask
+                  0x00075e                  __Task_Register
+                  0x0007ca                  _Task_Init
+                  0x0007ea                  _Task_FindNext
+                  0x000834                  _Task_FindNextTask
+                  0x000840                  _Task_FindBestTask
+                  0x00084a                  _Task_Wait
+                  0x00087c                  _Task_Signal
+                  0x0008bc                  _Task_Sleep
+                  0x0008d2                  _Task_SleepUntil
+                  0x0008e0                  _Task_Change
+                  0x000928                  __T1Interrupt
+ .text            0x000956         0xd6 build/default/production/_ext/761631083/taskQueue.o
+                  0x000956                  _TaskQueue_Create
+                  0x00096a                  _TaskQueue_Add
+                  0x0009a0                  _TaskQueue_WaitPeriod
+                  0x000a24                  _TaskQueue_Wait
+ .text            0x000a2c         0xd0 build/default/production/_ext/1472/main.o
+                  0x000a2c                  _Task_Task2
+                  0x000a6a                  _Task_Task1
+                  0x000ab6                  _main
+ .text            0x000afc         0x9a build/default/production/_ext/1015565369/kernel.o
+                  0x000afc                  _Kernel_InitializeStack
+                  0x000b2e                  _Kernel_ContextSave
+                  0x000b60                  _Kernel_ContextRestore
+                  0x000b90                  _Kernel_Suspend
 
 ../Portable/PIC24/task_switch.s.scn1
-                  0x00098c         0x4c
+                  0x000b96         0x4c
  ../Portable/PIC24/task_switch.s.scn1
-                  0x00098c         0x4c build/default/production/_ext/1015565369/task_switch.o
-                  0x00098c                  _Task_ChangeASM
+                  0x000b96         0x4c build/default/production/_ext/1015565369/task_switch.o
+                  0x000b96                  _Task_ChangeASM
 
-.text             0x0009d8         0x42
- .text            0x0009d8         0x26 build/default/production/_ext/1015565369/timer.o
-                  0x0009d8                  _Timer_StartSysTimer
-                  0x0009dc                  _Timer_ClrSysTimerInt
-                  0x0009e0                  _Timer_OpenSysTimer
- .text            0x0009fe         0x1c build/default/production/_ext/1015565369/PIC24.o
-                  0x0009fe                  _FW_Init
+.text             0x000be2         0x26
+ .text            0x000be2         0x26 build/default/production/_ext/1015565369/timer.o
+                  0x000be2                  _Timer_StartSysTimer
+                  0x000be6                  _Timer_ClrSysTimerInt
+                  0x000bea                  _Timer_OpenSysTimer
 
-.dinit            0x000a1a         0x18
- .dinit           0x000a1a         0x18 data_init
+.dinit            0x000c08         0x20
+ .dinit           0x000c08         0x20 data_init
+
+.text             0x000c28         0x1c
+ .text            0x000c28         0x1c build/default/production/_ext/1015565369/PIC24.o
+                  0x000c28                  _FW_Init

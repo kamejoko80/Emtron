@@ -68,118 +68,118 @@ FIXDEPS=fixDeps
 .build-conf:  ${BUILD_SUBPROJECTS}
 	${MAKE} ${MAKE_OPTIONS} -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/Emtron.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=24FJ256GB106
-MP_LINKER_FILE_OPTION=,--script=p24FJ256GB106.gld
+MP_PROCESSOR_OPTION=24FJ64GA002
+MP_LINKER_FILE_OPTION=,--script=p24FJ64GA002.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o: ../Devices/GraphicDisplay.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1543948142 
 	@${RM} ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Devices/GraphicDisplay.c  -o ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Devices/GraphicDisplay.c  -o ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/kernel.o: ../Portable/PIC24/kernel.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/kernel.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/kernel.c  -o ${OBJECTDIR}/_ext/1015565369/kernel.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/kernel.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/kernel.c  -o ${OBJECTDIR}/_ext/1015565369/kernel.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/kernel.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/kernel.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/timer.o: ../Portable/PIC24/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/timer.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/timer.c  -o ${OBJECTDIR}/_ext/1015565369/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/timer.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/timer.c  -o ${OBJECTDIR}/_ext/1015565369/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/timer.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/uart.o: ../Portable/PIC24/uart.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/uart.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/uart.c  -o ${OBJECTDIR}/_ext/1015565369/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/uart.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/uart.c  -o ${OBJECTDIR}/_ext/1015565369/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/uart.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/PIC24.o: ../Portable/PIC24/PIC24.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/PIC24.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/PIC24.c  -o ${OBJECTDIR}/_ext/1015565369/PIC24.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/PIC24.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/PIC24.c  -o ${OBJECTDIR}/_ext/1015565369/PIC24.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/PIC24.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/PIC24.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/rtos.o: ../RTOS/rtos.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/rtos.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/rtos.c  -o ${OBJECTDIR}/_ext/761631083/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/rtos.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/rtos.c  -o ${OBJECTDIR}/_ext/761631083/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/rtos.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/rtos.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/task.o: ../RTOS/task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/task.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/task.c  -o ${OBJECTDIR}/_ext/761631083/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/task.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/task.c  -o ${OBJECTDIR}/_ext/761631083/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/task.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/taskQueue.o: ../RTOS/taskQueue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/taskQueue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/taskQueue.c  -o ${OBJECTDIR}/_ext/761631083/taskQueue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/taskQueue.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/taskQueue.c  -o ${OBJECTDIR}/_ext/761631083/taskQueue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/taskQueue.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/taskQueue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1472 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -g -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -g -D__DEBUG   -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o: ../Devices/GraphicDisplay.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1543948142 
 	@${RM} ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Devices/GraphicDisplay.c  -o ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Devices/GraphicDisplay.c  -o ${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1543948142/GraphicDisplay.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/kernel.o: ../Portable/PIC24/kernel.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/kernel.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/kernel.c  -o ${OBJECTDIR}/_ext/1015565369/kernel.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/kernel.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/kernel.c  -o ${OBJECTDIR}/_ext/1015565369/kernel.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/kernel.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/kernel.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/timer.o: ../Portable/PIC24/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/timer.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/timer.c  -o ${OBJECTDIR}/_ext/1015565369/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/timer.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/timer.c  -o ${OBJECTDIR}/_ext/1015565369/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/timer.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/uart.o: ../Portable/PIC24/uart.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/uart.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/uart.c  -o ${OBJECTDIR}/_ext/1015565369/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/uart.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/uart.c  -o ${OBJECTDIR}/_ext/1015565369/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/uart.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1015565369/PIC24.o: ../Portable/PIC24/PIC24.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/PIC24.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/PIC24.c  -o ${OBJECTDIR}/_ext/1015565369/PIC24.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/PIC24.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Portable/PIC24/PIC24.c  -o ${OBJECTDIR}/_ext/1015565369/PIC24.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1015565369/PIC24.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/PIC24.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/rtos.o: ../RTOS/rtos.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/rtos.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/rtos.c  -o ${OBJECTDIR}/_ext/761631083/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/rtos.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/rtos.c  -o ${OBJECTDIR}/_ext/761631083/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/rtos.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/rtos.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/task.o: ../RTOS/task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/task.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/task.c  -o ${OBJECTDIR}/_ext/761631083/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/task.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/task.c  -o ${OBJECTDIR}/_ext/761631083/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/task.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/761631083/taskQueue.o: ../RTOS/taskQueue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/761631083 
 	@${RM} ${OBJECTDIR}/_ext/761631083/taskQueue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/taskQueue.c  -o ${OBJECTDIR}/_ext/761631083/taskQueue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/taskQueue.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../RTOS/taskQueue.c  -o ${OBJECTDIR}/_ext/761631083/taskQueue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/761631083/taskQueue.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/761631083/taskQueue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1472 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -g -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -omf=elf -O1 -I"C:/Users/Hans/Documents/GitHub/Emtron" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
@@ -190,14 +190,14 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/_ext/1015565369/task_switch.o: ../Portable/PIC24/task_switch.s  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/task_switch.o.d 
-	${MP_CC} $(MP_EXTRA_AS_PRE)  ../Portable/PIC24/task_switch.s  -o ${OBJECTDIR}/_ext/1015565369/task_switch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -Wa,-MD,"${OBJECTDIR}/_ext/1015565369/task_switch.o.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PICKIT2=1,-g,--relax$(MP_EXTRA_AS_POST)
+	${MP_CC} $(MP_EXTRA_AS_PRE)  ../Portable/PIC24/task_switch.s  -o ${OBJECTDIR}/_ext/1015565369/task_switch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG   -omf=elf -Wa,-MD,"${OBJECTDIR}/_ext/1015565369/task_switch.o.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,,-g,--relax$(MP_EXTRA_AS_POST)
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/task_switch.o.d"  $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/_ext/1015565369/task_switch.o: ../Portable/PIC24/task_switch.s  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1015565369 
 	@${RM} ${OBJECTDIR}/_ext/1015565369/task_switch.o.d 
-	${MP_CC} $(MP_EXTRA_AS_PRE)  ../Portable/PIC24/task_switch.s  -o ${OBJECTDIR}/_ext/1015565369/task_switch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -Wa,-MD,"${OBJECTDIR}/_ext/1015565369/task_switch.o.d",--defsym=__MPLAB_BUILD=1,-g,--relax$(MP_EXTRA_AS_POST)
+	${MP_CC} $(MP_EXTRA_AS_PRE)  ../Portable/PIC24/task_switch.s  -o ${OBJECTDIR}/_ext/1015565369/task_switch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -Wa,-MD,"${OBJECTDIR}/_ext/1015565369/task_switch.o.d",--defsym=__MPLAB_BUILD=1,--relax$(MP_EXTRA_AS_POST)
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1015565369/task_switch.o.d"  $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
 endif
@@ -213,7 +213,7 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/Emtron.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/Emtron.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1  -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PICKIT2=1,$(MP_LINKER_FILE_OPTION),--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,-s,--no-force-link,--smart-io,-Map="C:/Users/Hans/Documents/GitHub/Emtron/Emtron.X/usage.map",--report-mem$(MP_EXTRA_LD_POST) 
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/Emtron.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG   -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,,$(MP_LINKER_FILE_OPTION),--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,-s,--no-force-link,--smart-io,-Map="C:/Users/Hans/Documents/GitHub/Emtron/Emtron.X/usage.map",--report-mem$(MP_EXTRA_LD_POST) 
 	
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/Emtron.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   

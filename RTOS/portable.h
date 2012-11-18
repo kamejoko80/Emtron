@@ -2,9 +2,9 @@
 #define TRITON_PORTABLE_H 1
 
 #include "project.h"
-// All PIC24 devices:
-#include "Portable/PIC24/PIC24.h"
 
+#include "Portable/PIC24/PIC24.h"
+#include "Portable/STM32/STM32.h"
 
 #ifndef CLOCK_CPU
 	#error "CPU configuration didn't specify CPU clock in Hz"
@@ -24,8 +24,13 @@
 
 void FW_Init(void);
 
-inline void Kernel_ContextSave(void);
-inline void Kernel_ContextRestore(void);
-inline void Kernel_Suspend(void);
+void Kernel_Suspend(void);
+
+#ifndef Kernel_ContextSave
+void Kernel_ContextSave(void);
+#endif
+#ifndef Kernel_ContextRestore
+void Kernel_ContextRestore(void);
+#endif
 
 #endif

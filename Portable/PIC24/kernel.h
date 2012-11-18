@@ -5,6 +5,8 @@
 
 #ifdef TARGET_PIC24
 
+#define Kernel_Sleep() asm volatile("PWRSAV #1");//enter idle mode, wakeup by interrupt.
+
 #define dKernel_ContextSave() \
 asm volatile ("push SR\n" \
 	"push W0\n" \

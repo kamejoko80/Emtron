@@ -60,6 +60,7 @@
 
     #define GPIO_Direction_Output 0
     #define GPIO_Direction_Input 1
+    #define GPIO_Direction_Size 1
 
     /****************************** Header files ******************************/
     #ifdef PORTABLE_PIC24FJGA00x

@@ -5,75 +5,52 @@
 #include "RTOS/taskQueue.h"
 #include "RTOS/taskEvent.h"
 #include "main.h"
-#include "Devices/GraphicDisplay.h"
-
+  
 #define ButtonA GPIO(PB, 14)
 #define ButtonB GPIO(PB, 15)
 
-UI08_t DisplayBuffer1[128*64/8];
-
-GraphicDisplay_GPIOCfg GPIO_LCD1 = {
-    GPIO(PB, 3),
-    GPIO(PB, 1),
-    GPIO(PB, 2),
-
-    GPIO(PB, 4),
-    GPIO(PB, 5),
-    GPIO(PB, 6),
-    GPIO(PB, 7),
-    GPIO(PB, 8),
-    GPIO(PB, 9),
-    GPIO(PB, 10),
-    GPIO(PB, 11)
-};
-GraphicDisplay_t Dsp;
-
 #ifdef RTOS_QUEUES_AVAILABLE
 TaskQueue_t ButtonQueue;
-UI08_t ButtonQueueBf[8];
+UI08_t ButtonQueueBf[8*4];
 #endif
-typedef struct
+typedef struct ButtonMessage_s
 {
-    IOPin_t GPIO;
+    IOPin_t io;
 } ButtonMessage_t;
 
-Task(Task1, 128, 1)
+Task(Task1, 4000, 1)
 {
     ButtonMessage_t message;
+    message.io = GPIO(PD,14);
     while(1)
     {
 #ifdef RTOS_QUEUES_AVAILABLE
-        if (TaskQueue_Wait (&ButtonQueue, &message))
+        if (TaskQueue_WaitPeriod (&ButtonQueue, &message, 250))
         {
-            SGPIO_WriteGPIO(message.GPIO, 1- SGPIO_ReadGPIO(message.GPIO));
+            SGPIO_WriteGPIO(message.io, 1- SGPIO_ReadGPIO(message.io));
+        }
+        else
+        {
+            IOPin_t l = GPIO(PD, 14);
+            UI08_t a = 1-SGPIO_ReadGPIO(l);
+            SGPIO_WriteGPIO(l, a);
         }
 #else
-            GPIO_Write(PB, message.ButtonID, 1-GPIO_Read(PB, message.ButtonID));
+            SGPIO_WriteGPIO(message.io, 1-SGPIO_ReadGPIO(message.io));
 #endif
-        Task_Sleep(100);
-        
     }
 }
 
-Task(Task2, 128, 10)
+Task(Task2, 4000, 10)
 {
     ButtonMessage_t MyMessage;
-    MyMessage.GPIO = GPIO(PC, 0);
-    Task_Sleep(2);
-    SGPIO_Write1GPIO(GPIO(PB, 0));
-    GraphicDisplay_Power(&Dsp, 1);
+    MyMessage.io = GPIO(PD, 15);
     while(1)
     {
 #ifdef RTOS_QUEUES_AVAILABLE
         TaskQueue_Add(&ButtonQueue, &MyMessage);
 #endif
-        GraphicDisplay_Test(&Dsp);
-
-        if (GraphicDisplay_ReadPixel(&Dsp, 0, 0))
-            MyMessage.GPIO = GPIO(PC, 1);
-        else
-            MyMessage.GPIO = GPIO(PC, 0);
-        Task_Sleep(300);
+        Task_Sleep(1000);
     }
 }
 
@@ -83,31 +60,14 @@ int main(void)
 #ifdef RTOS_QUEUES_AVAILABLE
     TaskQueue_Create(&ButtonQueue, ButtonQueueBf, 8, sizeof(ButtonMessage_t));
 #endif
-#ifdef DEVICES_GRAPHIC_DISPLAY_USE_STATIC_IO
-    GraphicDisplay_Init(&Dsp, &DISPLAY_SED1565, &GPIO_LCD1, 128, 64);
-    //GraphicDisplay_AssignBuffer(&Dsp, DisplayBuffer1);
-#else
-    GraphicDisplay_Init(&Dsp, &DISPLAY_SED1565, 128, 64);
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_RS, GPIO(PB, 1));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_RW, GPIO(PB, 2));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_E,  GPIO(PB, 3));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D0, GPIO(PB, 4));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D1, GPIO(PB, 5));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D2, GPIO(PB, 6));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D3, GPIO(PB, 7));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D4, GPIO(PB, 8));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D5, GPIO(PB, 9));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D6, GPIO(PB, 10));
-    GraphicDisplay_GPIO(&Dsp, GraphicDisplay_IO_D7, GPIO(PB, 11));
-#endif
-    SGPIO_DirectionGPIO(GPIO(PB,0), OUTPUT);
-    SGPIO_DirectionGPIO(GPIO(PC, 0), OUTPUT);
-    SGPIO_DirectionGPIO(GPIO(PC, 1), OUTPUT);
-    SGPIO_Write0GPIO(GPIO(PB, 0));
+    SGPIO_DirectionGPIO(GPIO(PD, 15), OUTPUT);
+    SGPIO_DirectionGPIO(GPIO(PD, 14), OUTPUT);
+    SGPIO_DirectionGPIO(GPIO(PD, 13), OUTPUT);
     Task_Init();
     Task_Register(Task1);
     Task_Register(Task2);
     Task_Start();
 
+    while(1);
     return 0;
 }

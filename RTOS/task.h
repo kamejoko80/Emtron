@@ -83,7 +83,7 @@ typedef struct TritonTask_s
     //! Position last used in the stack. Saved at each context switch.
     int* StackPosition;
     //! Size of the actual stack.
-    int StackSize;
+    UI16_t StackSize;
 
     //! Timestamp of last run.
     Time_t RunLast;
@@ -127,7 +127,7 @@ void Task_Init(void);
  * @param Priority Integer value containing the priority of this task.
  * @return void
  */
-void _Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority);
+void _Task_Register(TritonTask_t* task, char* name, int* Stack, UI16_t StackSize, void* Method, int Priority);
 
 /**
  * Suspend a task for a x time.
@@ -175,9 +175,12 @@ Time_t Task_GetTime(void);
  */
 void Task_Start(void);
 
+void Task_Change(void);
+void Task_TickTimer(void);
+
 extern void Task_ChangeASM(void);
 
-void Kernel_InitializeStack(TritonTask_t* Task, int* stack, void* function);
+void Kernel_InitializeStack(TritonTask_t* Task, void* stack, void* function);
 
 
 extern int* CurrentTaskStack ;
@@ -185,14 +188,14 @@ extern UI16_t uxCriticalNesting;
 extern TritonTask_t* Task_Active;
 
 #define Task(name, stack_size, priority) TritonTask_t PASTE(Task_Inst_, name); \
-const UI08_t PASTE(Task_StackSize_, name) = stack_size; \
+const UI16_t PASTE(Task_StackSize_, name) = stack_size; \
 const UI08_t PASTE(Task_Priority_, name) = priority; \
 UI08_t PASTE(Task_Stack_, name) [stack_size]; \
 void PASTE(Task_, name) (void)
 
 #define TaskProto(name, stack_size) void PASTE(Task_, name) (void); \
 extern TritonTask_t PASTE(Task_Inst_, name); \
-extern const UI08_t PASTE(Task_StackSize_, name); \
+extern const UI16_t PASTE(Task_StackSize_, name); \
 extern const UI08_t PASTE(Task_Priority_, name); \
 extern UI08_t PASTE(Task_Stack_, name) [stack_size];
 
@@ -204,4 +207,7 @@ extern UI08_t PASTE(Task_Stack_, name) [stack_size];
     (void*)PASTE(Task_, name),  \
     PASTE(Task_Priority_, name) \
 );
+
+
+TaskProto(Idle, 512)
 #endif

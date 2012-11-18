@@ -1,12 +1,13 @@
 
 #include "RTOS/task.h"
+#include "RTOS/portable.h"
 
 TritonTask_t* Task_Top;
 TritonTask_t* Task_Active;
 TritonTask_t* Task_Tmp;
 TritonTask_t* Task_Next;
 
-UI16_t Task_CurrentStackLocation;
+UI32_t Task_CurrentStackLocation;
 UI08_t Task_ActiveID;
 Time_t Task_CurrentTime = 10;
 
@@ -17,6 +18,8 @@ UI16_t uxCriticalNesting = 0;
 TritonTask_t* Task_GetTask(int depth);
 void Task_FindNext(void);
 
+void Task_FindBestTask(void);
+void Task_FindNextTask(void);
 /**
  * Idle task of the RTOS.
  * Idle task of the RTOS could be used to bring the microcontroller into sleep. Please make sure that the portable supports timer interrupts whilst sleep.
@@ -24,11 +27,11 @@ void Task_FindNext(void);
 //TritonTask_t Task_Idle_Inst;
 //UI08_t Task_Idle_Stack[128];
 //void Task_Idle(void)
-Task(Idle, 128, 0)
+Task(Idle, 512, 0)
 {
     while(1)
     {
-        asm volatile("PWRSAV #1");//enter idle mode, wakeup by interrupt.
+        Kernel_Sleep();
     }
 }
 
@@ -78,11 +81,11 @@ TritonTask_t* Task_GetTask(int depth)
     return ref;
 }
 
-void _Task_Register(TritonTask_t* task, char* name, int* Stack, int StackSize, void* Method, int Priority)
+void _Task_Register(TritonTask_t* task, char* name, int* Stack, UI16_t StackSize, void* Method, int Priority)
 {
     memset(task, 0, sizeof(TritonTask_t));
-    Kernel_InitializeStack(task, Stack, Method);
     task->StackSize = StackSize;
+    Kernel_InitializeStack(task, Stack, Method);
     task->Priority = Priority;
     task->NextTask = 0;
     task->State = TASK_SUSPENDED;
@@ -182,12 +185,13 @@ UI08_t Task_Wait(TritonTaskState_WaitData_t argument)
 
 void Task_Signal(TritonTaskState_WaitData_t argument)
 {
+    UI32_t cmp = argument.data.__cmp;
     Task_Tmp  = Task_Top;
     do
     {
         if (Task_Tmp->State_WaitArgument.type == argument.type)
         {
-            if(Task_Tmp->State_WaitArgument.data.__cmp == argument.data.__cmp)
+            if((UI32_t)Task_Tmp->State_WaitArgument.data.__cmp ==  cmp)
             {
                 Task_Tmp->RunNext = Task_CurrentTime;
                 Task_Tmp->State = TASK_SUSPENDED; // return back to suspended.
@@ -271,7 +275,8 @@ void Task_Change(void)
 volatile UI16_t CPULoad=0;
 volatile Time_t CPULoadIdle=0;
 #endif
-void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
+
+void Task_TickTimer(void)
 {
 	Timer_ClrSysTimerInt();
 	Task_CurrentTime++;
@@ -290,5 +295,4 @@ void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
 
 	// This calls ASM to change context.
 	Kernel_Suspend();
-
 }

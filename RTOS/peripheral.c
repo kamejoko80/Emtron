@@ -1,5 +1,5 @@
-#include "peripheral.h"
-#include "task.h"
+#include "RTOS/peripheral.h"
+#include "RTOS/task.h"
 
 UI08_t __PeripheralDataHeap[CFG_PERIPHERAL_HEAPSIZE];
 PeripheralDriver_t __PeripheralDrivers[CFG_PERIPHEAL_MAX_DRIVERS];

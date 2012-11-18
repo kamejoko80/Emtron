@@ -4,6 +4,7 @@
 #include "RTOS/stddefs.h"
 #include "project.h"
 
+#ifdef RTOS_TRACE
 typedef enum RTOS_Trace_Message_e
 {
     RTOS_TRACE_TASK_START,
@@ -16,6 +17,7 @@ typedef enum RTOS_Trace_Message_e
 
 inline void RTOS_Trace(RTOS_Trace_Message_t message, UI08_t argl, void* arg);
 
+#endif
 
 #endif
 

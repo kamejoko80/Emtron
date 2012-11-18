@@ -24,4 +24,10 @@ void Timer_ClrSysTimerInt(void)
 {
     IFS0bits.T1IF = 0;
 }
+
+void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
+{
+    Task_TickTimer();
+}
+
 #endif

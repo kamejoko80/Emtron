@@ -1,8 +1,3 @@
-
-	/* Hi
-	* Do you also see flying ducks?
-	*/
-
 	.extern _Task_Change
 	.extern uxCriticalNesting
 

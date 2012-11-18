@@ -15,6 +15,7 @@
 
 #define F32_t float
 #define PTR16(addr) ((UI16_t*)addr)
+#define PTR32(addr) ((UI32_t*)addr)
 #ifndef NULL
     #define NULL 0
 #endif
@@ -35,19 +36,29 @@ typedef void            (*CaptureHandlerPtr_t) (UI08_t id, UI32_t elTime);
 typedef struct IOPin_s
 {
     unsigned port:3;         // A to D
-    unsigned pin:6;          // Pin 0 to 15
+    unsigned pin:7;          // Pin 0 to 31
     unsigned invert:1;       // 1 invert
 } IOPin_t;
 
 typedef struct IOPort_s
 {
-	UI16_t* TRIS;
-	UI16_t* PORT;
-	UI16_t* LAT;
-	UI16_t* ODC;
+	UI32_t* TRIS;
+	UI32_t* PORT;
+	UI32_t* LAT;
+	UI32_t* ODC;
 } IOPort_t;
 
 #include "RTOS/portable.h"
+
+// These struct initialisations are not compatible in C++
+#ifdef __cplusplus
+
+#define PIN(port, pin, invert) (IOPin_t){IO_##port, pin, invert}
+#define GPIO(port, pin) {IO_##port, pin, 0}
+#else
+#define PIN(port, pin, invert) (IOPin_t){IO_##port, pin, invert}
+#define GPIO(port, pin) (IOPin_t){IO_##port, pin, 0}
+#endif
 
 /***** General purpose Fast-GPIO writes (not flexible)*****/
 //TODO: add set/clr function
@@ -73,21 +84,18 @@ typedef struct IOPort_s
 #define FGPIO_Read(port, pin) ((GPIO_Write_##port>>pin) & 0x1)
 #define FGPIO_Direction(port, pin, dir) if(GPIO_Direction_##dir) \
 { \
-    GPIO_Tris_##port  |= 1<<pin; \
+    GPIO_Tris_##port  |= 1<<(GPIO_Direction_Size*pin); \
 }else{ \
-    GPIO_Tris_##port &= ~(1<<pin); \
+    GPIO_Tris_##port &= ~(1<<(GPIO_Direction_Size*pin)); \
 }
 
 /**** Look-up general purpose writes ****/
-#define PIN(port, pin, invert) (IOPin_t){IO_##port, pin, invert}
-#define GPIO(port, pin) (IOPin_t){IO_##port, pin, 0}
-
 // For use with structs (i.e. stored port number in memory)
 #define SGPIO_Direction(port, pin, dir) \
     if(dir) {   \
-        *(IOPorts[port].TRIS) |= 1<<pin;    \
+        *(IOPorts[port].TRIS) |= 1<<(GPIO_Direction_Size*pin);    \
     } else {    \
-        *(IOPorts[port].TRIS) &= ~(1<<pin); \
+        *(IOPorts[port].TRIS) &= ~(1<<(GPIO_Direction_Size*pin)); \
     }
 #define SGPIO_OpenDrainEnable(gpio) \
     *(IOPorts[(gpio).port].ODC) |= (1<<(gpio).pin);
@@ -95,9 +103,9 @@ typedef struct IOPort_s
     *(IOPorts[(gpio).port].ODC) &= ~(1<<(gpio).pin);
 #define SGPIO_DirectionGPIO(gpio, dir) \
     if(dir) {   \
-        *(IOPorts[(gpio).port].TRIS) |= (1<<(gpio).pin);    \
+        *(IOPorts[(gpio).port].TRIS) |= (1<<(GPIO_Direction_Size*(gpio).pin));    \
     } else {    \
-        *(IOPorts[(gpio).port].TRIS) &= ~(1<<(gpio).pin); \
+        *(IOPorts[(gpio).port].TRIS) &= ~(1<<(GPIO_Direction_Size*(gpio).pin)); \
     }
 #define SGPIO_Write(port, pin, value) \
     if(value) {\
@@ -122,9 +130,9 @@ typedef struct IOPort_s
 // For normal code (usage of macros)
 #define GPIO_Direction(port, pin, dir) \
     if(dir) {   \
-        *(IOPorts[IO_##port].TRIS) |= 1<<pin;    \
+        *(IOPorts[IO_##port].TRIS) |= 1<<(GPIO_Direction_Size*pin);    \
     } else {    \
-        *(IOPorts[IO_##port].TRIS) &= ~(1<<pin); \
+        *(IOPorts[IO_##port].TRIS) &= ~(1<<(GPIO_Direction_Size*pin)); \
     }
 
 #define GPIO_Write(port, pin, value) \
@@ -156,5 +164,6 @@ typedef enum BitResolution_t
 #define STRINGIFY(x) STRINGIFY2(x)
 #define PASTE_( a, b) a##b
 #define PASTE( a, b) PASTE_( a, b)
+
 
 #endif
